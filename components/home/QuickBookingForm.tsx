@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { MapPin, Calendar, Clock, Users, ArrowLeftRight } from "lucide-react";
+import AddressAutocomplete from "@/components/AddressAutocomplete";
 
 export default function QuickBookingForm() {
   const router = useRouter();
@@ -60,30 +61,26 @@ export default function QuickBookingForm() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
             <div className="lg:col-span-2">
               <label className="label-field">Départ</label>
-              <div className="relative">
-                <MapPin size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
-                <input
-                  required
-                  value={pickup}
-                  onChange={(e) => setPickup(e.target.value)}
-                  placeholder="Adresse, aéroport, gare..."
-                  className="input-field pl-10"
-                />
-              </div>
+              <AddressAutocomplete
+                required
+                value={pickup}
+                onChange={setPickup}
+                placeholder="Adresse, aéroport, gare..."
+                className="input-field pl-10"
+                icon={<MapPin size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />}
+              />
             </div>
 
             <div className="lg:col-span-2">
               <label className="label-field">Destination</label>
-              <div className="relative">
-                <ArrowLeftRight size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
-                <input
-                  required
-                  value={dropoff}
-                  onChange={(e) => setDropoff(e.target.value)}
-                  placeholder="Adresse d'arrivée"
-                  className="input-field pl-10"
-                />
-              </div>
+              <AddressAutocomplete
+                required
+                value={dropoff}
+                onChange={setDropoff}
+                placeholder="Adresse d'arrivée"
+                className="input-field pl-10"
+                icon={<ArrowLeftRight size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />}
+              />
             </div>
 
             <div>

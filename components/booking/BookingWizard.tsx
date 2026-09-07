@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { Plus, Trash2, CheckCircle2 } from "lucide-react";
 import clsx from "clsx";
 import StepIndicator from "./StepIndicator";
+import AvailabilityCalendar from "./AvailabilityCalendar";
+import AddressAutocomplete from "@/components/AddressAutocomplete";
 import { estimatePrice } from "@/lib/pricing";
 import { SERVICE_LABELS } from "@/lib/types";
 import type { BlockedSlot, PricingRule, ServiceType, TripType } from "@/lib/types";
@@ -279,22 +281,22 @@ export default function BookingWizard({
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className="label-field">Adresse de départ</label>
-                <input
-                  className="input-field"
+                <AddressAutocomplete
                   value={form.pickup_address}
-                  onChange={(e) => update("pickup_address", e.target.value)}
+                  onChange={(v) => update("pickup_address", v)}
                   placeholder="Adresse, aéroport, gare..."
+                  className="input-field"
                 />
               </div>
               <div>
                 <label className="label-field">
                   {form.trip_type === "mise_a_disposition" ? "Zone / destination principale" : "Destination"}
                 </label>
-                <input
-                  className="input-field"
+                <AddressAutocomplete
                   value={form.dropoff_address}
-                  onChange={(e) => update("dropoff_address", e.target.value)}
+                  onChange={(v) => update("dropoff_address", v)}
                   placeholder="Adresse d'arrivée"
+                  className="input-field"
                 />
               </div>
             </div>
@@ -315,12 +317,14 @@ export default function BookingWizard({
               <div className="space-y-2">
                 {form.stops.map((stop, i) => (
                   <div key={i} className="flex gap-2">
-                    <input
-                      className="input-field"
-                      value={stop}
-                      onChange={(e) => updateStop(i, e.target.value)}
-                      placeholder={`Étape ${i + 1}`}
-                    />
+                    <div className="flex-1">
+                      <AddressAutocomplete
+                        value={stop}
+                        onChange={(v) => updateStop(i, v)}
+                        placeholder={`Étape ${i + 1}`}
+                        className="input-field"
+                      />
+                    </div>
                     <button
                       type="button"
                       onClick={() => removeStop(i)}
@@ -339,18 +343,18 @@ export default function BookingWizard({
         {step === 2 && (
           <div className="space-y-6">
             <h2 className="heading-md mb-2">Date & horaires</h2>
-            <div className="grid sm:grid-cols-2 gap-4">
+
+            <div className="grid sm:grid-cols-[1fr_auto] gap-4 items-start">
               <div>
                 <label className="label-field">Date</label>
-                <input
-                  type="date"
-                  min={todayStr}
-                  className="input-field"
-                  value={form.date}
-                  onChange={(e) => update("date", e.target.value)}
+                <AvailabilityCalendar
+                  selectedDate={form.date}
+                  onSelect={(d) => update("date", d)}
+                  blockedSlots={blockedSlots}
+                  minDate={todayStr}
                 />
               </div>
-              <div>
+              <div className="sm:w-40">
                 <label className="label-field">Heure de départ</label>
                 <input
                   type="time"
@@ -362,18 +366,17 @@ export default function BookingWizard({
             </div>
 
             {form.trip_type === "aller_retour" && (
-              <div className="grid sm:grid-cols-2 gap-4 pt-2 border-t border-anthracite/10">
+              <div className="grid sm:grid-cols-[1fr_auto] gap-4 items-start pt-2 border-t border-anthracite/10">
                 <div>
                   <label className="label-field">Date de retour</label>
-                  <input
-                    type="date"
-                    min={form.date || todayStr}
-                    className="input-field"
-                    value={form.return_date}
-                    onChange={(e) => update("return_date", e.target.value)}
+                  <AvailabilityCalendar
+                    selectedDate={form.return_date}
+                    onSelect={(d) => update("return_date", d)}
+                    blockedSlots={blockedSlots}
+                    minDate={form.date || todayStr}
                   />
                 </div>
-                <div>
+                <div className="sm:w-40">
                   <label className="label-field">Heure de retour</label>
                   <input
                     type="time"
