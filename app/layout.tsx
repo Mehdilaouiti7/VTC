@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Outfit } from "next/font/google";
+import { Space_Grotesk, Outfit } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+// "Midnight Galaxy" theme (Anthropic theme-factory skill) pairs a single
+// modern sans-serif family across headers and body — Space Grotesk stands in
+// for the theme's system "FreeSans Bold" spec with a more distinctive,
+// web-native display weight for headings.
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-display",
   weight: ["500", "600", "700"],
   display: "swap",
 });
@@ -46,7 +50,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${playfair.variable} ${outfit.variable}`}>
+    <html lang="fr" className={`${spaceGrotesk.variable} ${outfit.variable}`}>
       <body>{children}</body>
     </html>
   );

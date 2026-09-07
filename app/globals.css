@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --font-playfair: "Playfair Display", serif;
+  --font-display: "Space Grotesk", sans-serif;
   --font-outfit: "Outfit", sans-serif;
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -105,11 +105,11 @@
 
   .btn-primary {
     @apply btn text-noir shadow-soft;
-    background: linear-gradient(180deg, #d4b483 0%, #b8965a 100%);
+    background: linear-gradient(180deg, #a98fc9 0%, #8b6fae 100%);
   }
 
   .btn-primary:hover {
-    box-shadow: 0 16px 36px -14px rgba(184, 150, 90, 0.55);
+    box-shadow: 0 16px 36px -14px rgba(139, 111, 174, 0.55);
     transform: translateY(-1px);
   }
 
@@ -138,7 +138,7 @@
 
   .input-field:focus {
     @apply border-or;
-    box-shadow: 0 0 0 4px rgba(184, 150, 90, 0.14);
+    box-shadow: 0 0 0 4px rgba(139, 111, 174, 0.16);
   }
 
   .label-field {
@@ -149,7 +149,7 @@
      "border + shadow + white box" formula — elevation communicates hierarchy on its own. */
   .card {
     @apply rounded-xl2 bg-white;
-    box-shadow: 0 1px 2px rgba(23, 17, 10, 0.04), 0 20px 44px -22px rgba(23, 17, 10, 0.22);
+    box-shadow: 0 1px 2px rgba(20, 14, 28, 0.05), 0 20px 44px -22px rgba(20, 14, 28, 0.24);
     transition: transform 320ms var(--ease-premium), box-shadow 320ms var(--ease-premium);
   }
 

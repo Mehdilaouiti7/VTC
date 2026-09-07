@@ -4,24 +4,27 @@ const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      // "Midnight Galaxy" theme (Anthropic theme-factory skill): deep purple,
+      // cosmic blue, lavender accent, silver — token names kept stable so the
+      // rest of the app didn't need touching, only the hex values changed.
       colors: {
-        noir: "#0a0a0c",
-        anthracite: "#17171b",
-        anthracite2: "#202024",
-        creme: "#f7f4ee",
-        creme2: "#efe9dd",
-        or: "#b8965a",
-        "or-light": "#d4b483",
-        beige: "#e7ddc9",
+        noir: "#2b1e3e",
+        anthracite: "#362849",
+        anthracite2: "#413055",
+        creme: "#e6e6fa",
+        creme2: "#dcdcf2",
+        or: "#8b6fae",
+        "or-light": "#a98fc9",
+        beige: "#4a4e8f",
       },
       fontFamily: {
-        display: ["var(--font-playfair)", "serif"],
+        display: ["var(--font-display)", "sans-serif"],
         sans: ["var(--font-outfit)", "sans-serif"],
       },
       boxShadow: {
-        soft: "0 20px 50px -20px rgba(23,17,10,0.28)",
-        deep: "0 30px 70px -25px rgba(10,10,12,0.55)",
-        gold: "0 0 0 1px rgba(184,150,90,0.35)",
+        soft: "0 20px 50px -20px rgba(20,14,32,0.32)",
+        deep: "0 30px 70px -25px rgba(16,11,26,0.6)",
+        gold: "0 0 0 1px rgba(139,111,174,0.35)",
         "inner-edge": "inset 0 1px 0 0 rgba(255,255,255,0.06)",
       },
       borderRadius: {
