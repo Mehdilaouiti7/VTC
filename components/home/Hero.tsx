@@ -17,21 +17,21 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/70 to-noir/15" />
       <div className="absolute inset-0 bg-gradient-to-r from-noir/65 via-transparent to-transparent" />
 
-      <div className="container-site relative z-10 pb-24 pt-48 sm:pb-32">
+      <div className="container-site relative z-10 pb-24 pt-24 sm:pb-32 sm:pt-48">
         <div className="max-w-3xl">
-          <span className="eyebrow mb-6 reveal in-view">Chauffeur privé indépendant</span>
-          <h1 className="heading-xl text-creme mb-6 reveal in-view" style={{ animationDelay: "80ms" }}>
+          <span className="eyebrow mb-4 sm:mb-6 reveal in-view">Chauffeur privé indépendant</span>
+          <h1 className="heading-xl text-creme mb-4 sm:mb-6 reveal in-view" style={{ animationDelay: "80ms" }}>
             Votre chauffeur privé, <br className="hidden sm:block" />
             directement avec vous.
           </h1>
           <p
-            className="text-creme/75 text-base sm:text-lg max-w-xl mb-10 leading-relaxed reveal in-view"
+            className="text-creme/75 text-base sm:text-lg max-w-xl mb-6 sm:mb-10 leading-relaxed reveal in-view"
             style={{ animationDelay: "160ms" }}
           >
             Déplacements professionnels, transferts aéroport, trajets privés et mise à
             disposition. Réservez votre chauffeur selon vos horaires et vos besoins.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 reveal in-view" style={{ animationDelay: "240ms" }}>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 reveal in-view" style={{ animationDelay: "240ms" }}>
             <Link href="/reserver" className="btn-primary">
               Réserver un trajet
             </Link>
@@ -40,7 +40,7 @@ export default function Hero() {
             </Link>
           </div>
           <p
-            className="mt-8 text-xs sm:text-sm uppercase tracking-[0.2em] text-creme/45 reveal in-view"
+            className="mt-6 sm:mt-8 text-[10px] sm:text-sm uppercase tracking-[0.1em] sm:tracking-[0.2em] text-creme/45 reveal in-view"
             style={{ animationDelay: "320ms" }}
           >
             Réservation directe • Chauffeur professionnel • Service personnalisé • Sans intermédiaire
