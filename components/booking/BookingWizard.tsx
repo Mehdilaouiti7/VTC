@@ -198,7 +198,7 @@ export default function BookingWizard({
 
   if (confirmed) {
     return (
-      <div className="card max-w-xl mx-auto p-10 sm:p-14 text-center">
+      <div className="card step-enter max-w-xl mx-auto p-10 sm:p-14 text-center">
         <CheckCircle2 size={52} className="text-or mx-auto mb-6" />
         <h2 className="heading-md mb-4">Votre demande a bien été envoyée</h2>
         <p className="text-anthracite/60 leading-relaxed mb-8">
@@ -223,6 +223,7 @@ export default function BookingWizard({
       <StepIndicator current={step} />
 
       <div className="card p-6 sm:p-10 max-w-3xl mx-auto">
+      <div key={step} className="step-enter">
         {step === 1 && (
           <div className="space-y-6">
             <h2 className="heading-md mb-2">Votre trajet</h2>
@@ -570,6 +571,7 @@ export default function BookingWizard({
             </p>
           </div>
         )}
+      </div>
 
         <div className="flex items-center justify-between mt-10 pt-6 border-t border-anthracite/10">
           <button

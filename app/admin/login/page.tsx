@@ -47,9 +47,11 @@ export default function AdminLoginPage() {
             <input
               required
               type="email"
+              autoComplete="email"
+              placeholder="vous@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="input-field !bg-noir !text-creme !border-white/10"
+              className="input-field !bg-noir !text-creme !border-white/15 placeholder:!text-creme/25"
             />
           </div>
           <div>
@@ -57,9 +59,11 @@ export default function AdminLoginPage() {
             <input
               required
               type="password"
+              autoComplete="current-password"
+              placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="input-field !bg-noir !text-creme !border-white/10"
+              className="input-field !bg-noir !text-creme !border-white/15 placeholder:!text-creme/25"
             />
           </div>
           {error && <p className="text-sm text-red-400">{error}</p>}

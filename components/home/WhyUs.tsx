@@ -7,9 +7,9 @@ const ICONS = { Clock3, Armchair, ShieldCheck, UserCheck };
 
 export default function WhyUs() {
   return (
-    <section className="section-padding bg-noir text-creme overflow-hidden">
+    <section className="section-padding bg-noir text-creme overflow-hidden grain">
       <div className="container-site grid lg:grid-cols-2 gap-16 items-center">
-        <Reveal>
+        <Reveal className="relative">
           <div className="relative aspect-[4/5] rounded-xl2 overflow-hidden">
             <Image
               src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1600&auto=format&fit=crop"
@@ -18,6 +18,12 @@ export default function WhyUs() {
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
+          </div>
+          <div className="card-dark absolute -bottom-6 -right-4 sm:right-6 px-6 py-5 max-w-[210px]">
+            <p className="font-display text-3xl text-or leading-none mb-1">99%</p>
+            <p className="text-xs text-creme/55 leading-snug">
+              de trajets assurés à l&apos;heure exacte convenue
+            </p>
           </div>
         </Reveal>
 

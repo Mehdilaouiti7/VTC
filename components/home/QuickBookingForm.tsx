@@ -39,7 +39,7 @@ export default function QuickBookingForm() {
               <button
                 type="button"
                 onClick={() => setTripType("aller_simple")}
-                className={`px-4 py-2 rounded-md text-xs font-medium tracking-wide transition ${
+                className={`px-4 py-2 rounded-md text-xs font-medium tracking-wide transition-colors duration-300 ease-premium active:scale-95 ${
                   tripType === "aller_simple" ? "bg-noir text-creme" : "text-anthracite/60"
                 }`}
               >
@@ -48,7 +48,7 @@ export default function QuickBookingForm() {
               <button
                 type="button"
                 onClick={() => setTripType("aller_retour")}
-                className={`px-4 py-2 rounded-md text-xs font-medium tracking-wide transition ${
+                className={`px-4 py-2 rounded-md text-xs font-medium tracking-wide transition-colors duration-300 ease-premium active:scale-95 ${
                   tripType === "aller_retour" ? "bg-noir text-creme" : "text-anthracite/60"
                 }`}
               >
@@ -61,13 +61,13 @@ export default function QuickBookingForm() {
             <div className="lg:col-span-2">
               <label className="label-field">Départ</label>
               <div className="relative">
-                <MapPin size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-or" />
+                <MapPin size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
                 <input
                   required
                   value={pickup}
                   onChange={(e) => setPickup(e.target.value)}
                   placeholder="Adresse, aéroport, gare..."
-                  className="input-field pl-9"
+                  className="input-field pl-10"
                 />
               </div>
             </div>
@@ -75,13 +75,13 @@ export default function QuickBookingForm() {
             <div className="lg:col-span-2">
               <label className="label-field">Destination</label>
               <div className="relative">
-                <ArrowLeftRight size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-or" />
+                <ArrowLeftRight size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
                 <input
                   required
                   value={dropoff}
                   onChange={(e) => setDropoff(e.target.value)}
                   placeholder="Adresse d'arrivée"
-                  className="input-field pl-9"
+                  className="input-field pl-10"
                 />
               </div>
             </div>
@@ -89,14 +89,14 @@ export default function QuickBookingForm() {
             <div>
               <label className="label-field">Date</label>
               <div className="relative">
-                <Calendar size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-or" />
+                <Calendar size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
                 <input
                   required
                   type="date"
                   min={new Date().toISOString().split("T")[0]}
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="input-field pl-9"
+                  className="input-field pl-10"
                 />
               </div>
             </div>
@@ -104,13 +104,13 @@ export default function QuickBookingForm() {
             <div>
               <label className="label-field">Heure</label>
               <div className="relative">
-                <Clock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-or" />
+                <Clock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
                 <input
                   required
                   type="time"
                   value={time}
                   onChange={(e) => setTime(e.target.value)}
-                  className="input-field pl-9"
+                  className="input-field pl-10"
                 />
               </div>
             </div>
@@ -120,7 +120,7 @@ export default function QuickBookingForm() {
             <div className="w-full sm:w-48">
               <label className="label-field">Passagers</label>
               <div className="relative">
-                <Users size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-or" />
+                <Users size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
                 <input
                   required
                   type="number"
@@ -128,7 +128,7 @@ export default function QuickBookingForm() {
                   max={50}
                   value={passengers}
                   onChange={(e) => setPassengers(Number(e.target.value))}
-                  className="input-field pl-9"
+                  className="input-field pl-10"
                 />
               </div>
             </div>

@@ -41,11 +41,13 @@ export default function ContactSection() {
                 href={item.href}
                 target={item.href.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
-                className="card block p-8 hover:-translate-y-1 transition-transform duration-300"
+                className="card group block p-8 hover:-translate-y-1"
               >
-                <item.icon size={24} className="text-or mx-auto mb-4" />
+                <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-noir transition-colors duration-300 ease-premium group-hover:bg-or">
+                  <item.icon size={18} className="text-or transition-colors duration-300 ease-premium group-hover:text-noir" />
+                </div>
                 <h3 className="font-display text-lg mb-1">{item.title}</h3>
-                <p className="text-sm text-anthracite/60">{item.value}</p>
+                <p className="text-sm text-anthracite/55">{item.value}</p>
               </a>
             </Reveal>
           ))}
