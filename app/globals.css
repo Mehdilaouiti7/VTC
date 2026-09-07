@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-playfair: "Playfair Display", serif;
+  --font-inter: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-creme text-anthracite antialiased;
+}
+
+::selection {
+  @apply bg-or/30 text-noir;
+}
+
+.container-site {
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+}
+
+.section-padding {
+  @apply py-20 sm:py-28;
+}
+
+.eyebrow {
+  @apply inline-flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.25em] text-or font-medium;
+}
+
+.heading-xl {
+  @apply font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.08] tracking-tight;
+}
+
+.heading-lg {
+  @apply font-display text-3xl sm:text-4xl leading-tight tracking-tight;
+}
+
+.heading-md {
+  @apply font-display text-2xl sm:text-3xl leading-tight;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-7 py-3.5 text-sm font-medium tracking-wide transition-all duration-300 ease-out;
+}
+
+.btn-primary {
+  @apply btn bg-or text-noir hover:bg-or-light shadow-soft;
+}
+
+.btn-secondary {
+  @apply btn border border-creme/30 text-creme hover:border-or hover:text-or bg-transparent;
+}
+
+.btn-dark {
+  @apply btn bg-anthracite text-creme hover:bg-noir border border-anthracite2;
+}
+
+.input-field {
+  @apply w-full rounded-lg border border-anthracite2/15 bg-white px-4 py-3 text-sm text-anthracite placeholder:text-anthracite/40 outline-none transition focus:border-or focus:ring-2 focus:ring-or/20;
+}
+
+.label-field {
+  @apply mb-1.5 block text-xs font-medium uppercase tracking-wider text-anthracite/60;
+}
+
+.card {
+  @apply rounded-xl2 border border-anthracite/5 bg-white shadow-soft;
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal.in-view {
+  animation: fadeUp 0.7s ease forwards;
+}
