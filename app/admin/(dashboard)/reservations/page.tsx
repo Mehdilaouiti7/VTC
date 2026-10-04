@@ -33,10 +33,12 @@ export default async function ReservationsPage({
     <div>
       <h1 className="heading-md mb-8">Réservations</h1>
 
-      <div className="grid lg:grid-cols-[280px_1fr] gap-8">
-        <BookingsCalendar bookingDates={(allDates || []).map((b) => b.date as string)} />
+      <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
+        <div className="min-w-0">
+          <BookingsCalendar bookingDates={(allDates || []).map((b) => b.date as string)} />
+        </div>
 
-        <div>
+        <div className="min-w-0">
           <div className="flex gap-2 mb-6 overflow-x-auto pb-1">
             {TABS.map((tab) => (
               <Link
