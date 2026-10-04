@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, X } from "@phosphor-icons/react/dist/ssr";
+import { Check, X, Phone, WhatsappLogo, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import type { QuoteRequest } from "@/lib/types";
 import { SERVICE_LABELS } from "@/lib/types";
 import StatusBadge from "@/components/admin/StatusBadge";
@@ -22,6 +22,8 @@ export default function QuoteCard({ quote }: { quote: QuoteRequest }) {
     router.refresh();
   }
 
+  const waNumber = quote.phone.replace(/[^\d]/g, "");
+
   return (
     <div className="card p-6">
       <div className="flex items-start justify-between gap-4 mb-3">
@@ -34,6 +36,29 @@ export default function QuoteCard({ quote }: { quote: QuoteRequest }) {
           </p>
         </div>
         <StatusBadge status={quote.status} />
+      </div>
+
+      <div className="flex gap-2 mb-4">
+        <a
+          href={`tel:${quote.phone.replace(/\s/g, "")}`}
+          className="flex items-center gap-1.5 rounded-full border border-anthracite/10 px-3 py-1.5 text-xs text-anthracite/70 hover:border-or hover:text-or transition-colors"
+        >
+          <Phone weight="light" size={14} /> Appeler
+        </a>
+        <a
+          href={`https://wa.me/${waNumber}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 rounded-full border border-anthracite/10 px-3 py-1.5 text-xs text-anthracite/70 hover:border-or hover:text-or transition-colors"
+        >
+          <WhatsappLogo weight="light" size={14} /> WhatsApp
+        </a>
+        <a
+          href={`mailto:${quote.email}`}
+          className="flex items-center gap-1.5 rounded-full border border-anthracite/10 px-3 py-1.5 text-xs text-anthracite/70 hover:border-or hover:text-or transition-colors"
+        >
+          <EnvelopeSimple weight="light" size={14} /> Email
+        </a>
       </div>
 
       {quote.service_type && (

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { quoteSchema } from "@/lib/validation";
 import { sendQuoteEmails } from "@/lib/email";
+import { sendQuoteReceivedWhatsApp } from "@/lib/whatsapp";
 import type { QuoteRequest } from "@/lib/types";
 
 export async function POST(request: Request) {
@@ -35,6 +36,9 @@ export async function POST(request: Request) {
 
   sendQuoteEmails(data as QuoteRequest).catch((err) =>
     console.error("Erreur envoi email devis", err)
+  );
+  sendQuoteReceivedWhatsApp(data as QuoteRequest).catch((err) =>
+    console.error("Erreur envoi WhatsApp devis", err)
   );
 
   return NextResponse.json({ quote: data }, { status: 201 });

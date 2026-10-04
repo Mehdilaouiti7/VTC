@@ -139,3 +139,29 @@ export async function sendQuoteEmails(quote: QuoteRequest) {
     console.error("Erreur lors de l'envoi des emails de devis", error);
   }
 }
+
+export async function sendQuoteStatusEmail(quote: QuoteRequest) {
+  const resend = getResend();
+  if (!resend) return;
+
+  const confirmed = quote.status === "confirmed";
+
+  try {
+    await resend.emails.send({
+      from: FROM,
+      to: quote.email,
+      subject: confirmed ? "Votre devis est disponible" : "Votre demande de devis",
+      html: confirmed
+        ? `
+          <h2>Bonjour ${quote.first_name},</h2>
+          <p>Votre chauffeur a étudié votre demande personnalisée et vous recontacte directement (téléphone, email ou WhatsApp) avec une proposition adaptée à vos besoins.</p>
+        `
+        : `
+          <h2>Bonjour ${quote.first_name},</h2>
+          <p>Nous ne sommes malheureusement pas en mesure de répondre à votre demande de devis. N'hésitez pas à nous contacter directement pour en discuter.</p>
+        `,
+    });
+  } catch (error) {
+    console.error("Erreur lors de l'envoi de l'email de statut du devis", error);
+  }
+}

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { sendBookingStatusEmail } from "@/lib/email";
+import { sendBookingStatusWhatsApp } from "@/lib/whatsapp";
 import type { Booking } from "@/lib/types";
 
 export async function PATCH(request: Request, { params }: { params: { id: string } }) {
@@ -43,6 +44,9 @@ export async function PATCH(request: Request, { params }: { params: { id: string
   if (body.status === "confirmed" || body.status === "refused") {
     sendBookingStatusEmail(data as Booking).catch((err) =>
       console.error("Erreur envoi email statut", err)
+    );
+    sendBookingStatusWhatsApp(data as Booking).catch((err) =>
+      console.error("Erreur envoi WhatsApp statut", err)
     );
   }
 

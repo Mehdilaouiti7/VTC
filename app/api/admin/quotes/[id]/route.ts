@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { sendQuoteStatusEmail } from "@/lib/email";
+import { sendQuoteStatusWhatsApp } from "@/lib/whatsapp";
+import type { QuoteRequest } from "@/lib/types";
 
 export async function PATCH(request: Request, { params }: { params: { id: string } }) {
   const supabase = createClient();
@@ -29,6 +32,15 @@ export async function PATCH(request: Request, { params }: { params: { id: string
   if (error) {
     console.error("Erreur mise à jour devis", error);
     return NextResponse.json({ error: "Mise à jour impossible" }, { status: 500 });
+  }
+
+  if (body.status === "confirmed" || body.status === "refused") {
+    sendQuoteStatusEmail(data as QuoteRequest).catch((err) =>
+      console.error("Erreur envoi email statut devis", err)
+    );
+    sendQuoteStatusWhatsApp(data as QuoteRequest).catch((err) =>
+      console.error("Erreur envoi WhatsApp statut devis", err)
+    );
   }
 
   return NextResponse.json({ quote: data });
