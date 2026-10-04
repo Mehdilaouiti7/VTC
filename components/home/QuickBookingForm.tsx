@@ -62,7 +62,7 @@ export default function QuickBookingForm() {
             className="grid-gutters"
             style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 180px), 1fr))" }}
           >
-            <div className="bg-bg p-4" style={{ gridColumn: "span 2" }}>
+            <div className="bg-bg p-4 sm:[grid-column:span_2]">
               <label className="label-field">Départ</label>
               <AddressAutocomplete
                 required
@@ -74,7 +74,7 @@ export default function QuickBookingForm() {
               />
             </div>
 
-            <div className="bg-bg p-4" style={{ gridColumn: "span 2" }}>
+            <div className="bg-bg p-4 sm:[grid-column:span_2]">
               <label className="label-field">Destination</label>
               <AddressAutocomplete
                 required
@@ -133,8 +133,7 @@ export default function QuickBookingForm() {
 
             <button
               type="submit"
-              className="bg-accent text-bg flex items-center justify-between gap-3 p-4 text-base font-extrabold font-display"
-              style={{ gridColumn: "span 2" }}
+              className="bg-accent text-bg flex items-center justify-between gap-3 p-4 text-base font-extrabold font-display sm:[grid-column:span_2]"
             >
               Continuer la réservation
               <ArrowRight size={18} strokeWidth={2} />

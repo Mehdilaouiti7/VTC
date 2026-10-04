@@ -12,7 +12,7 @@ export default function Services() {
       <div className="container-site">
         <div
           className="grid gap-8 mb-12"
-          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))" }}
+          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))" }}
         >
           <Reveal>
             <span className="eyebrow">01 — Nos services</span>
@@ -38,8 +38,7 @@ export default function Services() {
               <Reveal
                 key={service.key}
                 delay={i * 90}
-                className="relative"
-                style={featured ? { gridColumn: "span 2" } : undefined}
+                className={clsx("relative", featured && "sm:[grid-column:span_2]")}
               >
                 {featured ? (
                   <div className="relative min-h-[320px] h-full overflow-hidden">

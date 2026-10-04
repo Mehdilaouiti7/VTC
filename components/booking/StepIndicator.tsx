@@ -1,4 +1,4 @@
-import { Check } from "@phosphor-icons/react/dist/ssr";
+import { Check } from "lucide-react";
 import clsx from "clsx";
 
 const STEPS = ["Trajet", "Date & horaires", "Vos besoins", "Coordonnées", "Récapitulatif"];
@@ -6,11 +6,11 @@ const STEPS = ["Trajet", "Date & horaires", "Vos besoins", "Coordonnées", "Réc
 export default function StepIndicator({ current }: { current: number }) {
   return (
     <div className="max-w-3xl mx-auto mb-10 sm:mb-12">
-      <p className="sm:hidden text-center text-xs uppercase tracking-wider text-anthracite/50 mb-4">
-        Étape {current}/{STEPS.length} — <span className="text-anthracite">{STEPS[current - 1]}</span>
+      <p className="sm:hidden text-center text-xs uppercase tracking-wider text-ink/50 mb-4">
+        Étape {current}/{STEPS.length} — <span className="text-ink font-semibold">{STEPS[current - 1]}</span>
       </p>
 
-      <div className="flex items-center justify-between">
+      <div className="hidden sm:flex items-center justify-between">
         {STEPS.map((label, i) => {
           const stepNum = i + 1;
           const active = stepNum === current;
@@ -20,18 +20,18 @@ export default function StepIndicator({ current }: { current: number }) {
               <div className="flex flex-col items-center gap-2">
                 <div
                   className={clsx(
-                    "flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full text-xs font-medium border transition-colors",
-                    done && "bg-or border-or text-noir",
-                    active && "border-or text-or",
-                    !active && !done && "border-anthracite/15 text-anthracite/40"
+                    "flex h-9 w-9 shrink-0 items-center justify-center text-xs font-semibold border-2",
+                    done && "bg-accent border-accent text-bg",
+                    active && "border-accent text-accent",
+                    !active && !done && "border-divider text-ink/40"
                   )}
                 >
-                  {done ? <Check weight="light" size={15} /> : stepNum}
+                  {done ? <Check size={15} strokeWidth={2} /> : stepNum}
                 </div>
                 <span
                   className={clsx(
-                    "hidden sm:block text-[11px] uppercase tracking-wide whitespace-nowrap",
-                    active ? "text-anthracite" : "text-anthracite/40"
+                    "text-[11px] uppercase tracking-wide whitespace-nowrap",
+                    active ? "text-ink font-semibold" : "text-ink/40"
                   )}
                 >
                   {label}
@@ -40,8 +40,8 @@ export default function StepIndicator({ current }: { current: number }) {
               {stepNum !== STEPS.length && (
                 <div
                   className={clsx(
-                    "h-px flex-1 mx-1.5 sm:mx-2 sm:mt-[-18px]",
-                    done ? "bg-or" : "bg-anthracite/10"
+                    "h-[2px] flex-1 mx-1.5 sm:mx-2 sm:mt-[-18px]",
+                    done ? "bg-accent" : "bg-divider"
                   )}
                 />
               )}

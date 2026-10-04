@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Plus, Trash as Trash2, CheckCircle as CheckCircle2 } from "@phosphor-icons/react/dist/ssr";
+import { Plus, Trash2, CheckCircle2 } from "lucide-react";
 import clsx from "clsx";
 import StepIndicator from "./StepIndicator";
 import AvailabilityCalendar from "./AvailabilityCalendar";
@@ -200,19 +200,19 @@ export default function BookingWizard({
 
   if (confirmed) {
     return (
-      <div className="card step-enter max-w-xl mx-auto p-10 sm:p-14 text-center">
-        <CheckCircle2 weight="light" size={52} className="text-or mx-auto mb-6" />
+      <div className="card step-enter max-w-xl mx-auto p-10 sm:p-14 text-center border-2 border-divider">
+        <CheckCircle2 size={52} strokeWidth={2} className="text-accent mx-auto mb-6" />
         <h2 className="heading-md mb-4">Votre demande a bien été envoyée</h2>
-        <p className="text-anthracite/60 leading-relaxed mb-8">
+        <p className="text-ink/60 leading-relaxed mb-8">
           Merci {form.first_name}, nous avons bien reçu votre demande de réservation. Votre
           chauffeur va la confirmer très prochainement. Vous recevrez un email de confirmation
           dès validation.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="btn-dark">
+          <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="btn-primary">
             Appeler le chauffeur
           </a>
-          <a href="/" className="btn-secondary !text-anthracite !border-anthracite/20">
+          <a href="/" className="btn-secondary">
             Retour à l&apos;accueil
           </a>
         </div>
@@ -224,7 +224,7 @@ export default function BookingWizard({
     <div>
       <StepIndicator current={step} />
 
-      <div className="card p-6 sm:p-10 max-w-3xl mx-auto">
+      <div className="card border-2 border-divider p-6 sm:p-10 max-w-3xl mx-auto">
       <div key={step} className="step-enter">
         {step === 1 && (
           <div className="space-y-6">
@@ -239,10 +239,10 @@ export default function BookingWizard({
                     key={opt.value}
                     onClick={() => update("service_type", opt.value)}
                     className={clsx(
-                      "rounded-lg border px-4 py-3 text-sm text-left transition",
+                      "border px-4 py-3 text-sm text-left transition-colors",
                       form.service_type === opt.value
-                        ? "border-or bg-or/10 text-anthracite"
-                        : "border-anthracite/10 text-anthracite/60 hover:border-anthracite/30"
+                        ? "border-accent bg-accent-100 text-ink"
+                        : "border-divider text-ink/60 hover:border-ink/30"
                     )}
                   >
                     {opt.label}
@@ -266,10 +266,10 @@ export default function BookingWizard({
                     key={opt.value}
                     onClick={() => update("trip_type", opt.value)}
                     className={clsx(
-                      "rounded-lg border px-3 py-3 text-xs sm:text-sm transition",
+                      "border px-3 py-3 text-xs sm:text-sm transition-colors",
                       form.trip_type === opt.value
-                        ? "border-or bg-or/10 text-anthracite"
-                        : "border-anthracite/10 text-anthracite/60 hover:border-anthracite/30"
+                        ? "border-accent bg-accent-100 text-ink"
+                        : "border-divider text-ink/60 hover:border-ink/30"
                     )}
                   >
                     {opt.label}
@@ -308,9 +308,9 @@ export default function BookingWizard({
                   <button
                     type="button"
                     onClick={addStop}
-                    className="flex items-center gap-1 text-xs text-or hover:underline"
+                    className="flex items-center gap-1 text-xs text-accent hover:underline"
                   >
-                    <Plus weight="light" size={14} /> Ajouter une étape
+                    <Plus size={14} strokeWidth={2} /> Ajouter une étape
                   </button>
                 )}
               </div>
@@ -328,10 +328,10 @@ export default function BookingWizard({
                     <button
                       type="button"
                       onClick={() => removeStop(i)}
-                      className="shrink-0 text-anthracite/40 hover:text-red-500"
+                      className="shrink-0 text-ink/40 hover:text-red-500"
                       aria-label="Supprimer l'étape"
                     >
-                      <Trash2 weight="light" size={18} />
+                      <Trash2 size={18} strokeWidth={2} />
                     </button>
                   </div>
                 ))}
@@ -366,7 +366,7 @@ export default function BookingWizard({
             </div>
 
             {form.trip_type === "aller_retour" && (
-              <div className="grid sm:grid-cols-[1fr_auto] gap-4 items-start pt-2 border-t border-anthracite/10">
+              <div className="grid sm:grid-cols-[1fr_auto] gap-4 items-start pt-2 border-t border-divider">
                 <div>
                   <label className="label-field">Date de retour</label>
                   <AvailabilityCalendar
@@ -396,7 +396,7 @@ export default function BookingWizard({
             )}
 
             {form.trip_type === "mise_a_disposition" && (
-              <div className="pt-2 border-t border-anthracite/10">
+              <div className="pt-2 border-t border-divider">
                 <label className="label-field">Durée souhaitée (heures)</label>
                 <input
                   type="number"
@@ -406,7 +406,7 @@ export default function BookingWizard({
                   value={form.duration_hours}
                   onChange={(e) => update("duration_hours", Number(e.target.value))}
                 />
-                <p className="text-xs text-anthracite/45 mt-2">
+                <p className="text-xs text-ink/45 mt-2">
                   Pour une mise à disposition sur plusieurs jours, indiquez le nombre d&apos;heures
                   total ou précisez en commentaire à l&apos;étape suivante.
                 </p>
@@ -448,7 +448,7 @@ export default function BookingWizard({
                 type="checkbox"
                 checked={form.child_seat}
                 onChange={(e) => update("child_seat", e.target.checked)}
-                className="h-5 w-5 rounded border-anthracite/20 text-or focus:ring-or"
+                className="h-5 w-5 border-divider text-accent focus:ring-accent"
               />
               <span className="text-sm">J&apos;ai besoin d&apos;un siège enfant</span>
             </label>
@@ -527,7 +527,7 @@ export default function BookingWizard({
         {step === 5 && (
           <div className="space-y-6">
             <h2 className="heading-md mb-2">Récapitulatif</h2>
-            <div className="rounded-lg border border-anthracite/10 divide-y divide-anthracite/10 text-sm">
+            <div className="border-2 border-divider divide-y divide-divider text-sm">
               <RecapRow label="Service" value={SERVICE_LABELS[form.service_type]} />
               <RecapRow
                 label="Trajet"
@@ -567,7 +567,7 @@ export default function BookingWizard({
 
             {submitError && <p className="text-sm text-red-500">{submitError}</p>}
 
-            <p className="text-xs text-anthracite/45">
+            <p className="text-xs text-ink/45">
               En confirmant, vous acceptez d&apos;être contacté(e) par votre chauffeur pour finaliser
               votre réservation. Le prix final peut être ajusté selon les conditions réelles du
               trajet.
@@ -576,11 +576,11 @@ export default function BookingWizard({
         )}
       </div>
 
-        <div className="flex items-center justify-between mt-10 pt-6 border-t border-anthracite/10">
+        <div className="flex items-center justify-between mt-10 pt-6 border-t border-divider">
           <button
             type="button"
             onClick={() => setStep((s) => Math.max(1, s - 1))}
-            className={clsx("text-sm text-anthracite/60 hover:text-anthracite", step === 1 && "invisible")}
+            className={clsx("text-sm text-ink/60 hover:text-ink", step === 1 && "invisible")}
           >
             ← Retour
           </button>
@@ -613,8 +613,8 @@ export default function BookingWizard({
 function RecapRow({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
     <div className="flex justify-between gap-4 px-4 py-3">
-      <span className="text-anthracite/50">{label}</span>
-      <span className={clsx("text-right font-medium", highlight && "text-or")}>{value}</span>
+      <span className="text-ink/50">{label}</span>
+      <span className={clsx("text-right font-medium", highlight && "text-accent")}>{value}</span>
     </div>
   );
 }

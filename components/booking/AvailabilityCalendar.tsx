@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { CaretLeft as ChevronLeft, CaretRight as ChevronRight } from "@phosphor-icons/react/dist/ssr";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import clsx from "clsx";
 import type { BlockedSlot } from "@/lib/types";
 
@@ -81,30 +81,30 @@ export default function AvailabilityCalendar({
   }, [cursor]);
 
   return (
-    <div className="rounded-lg border border-anthracite2/15 bg-white p-4">
+    <div className="border-2 border-divider bg-bg p-4">
       <div className="flex items-center justify-between mb-4">
         <button
           type="button"
           onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1))}
-          className="p-1.5 rounded hover:bg-anthracite/5 transition-colors duration-200 ease-premium"
+          className="p-1.5 hover:bg-surface transition-colors"
           aria-label="Mois précédent"
         >
-          <ChevronLeft weight="light" size={18} />
+          <ChevronLeft size={18} strokeWidth={2} />
         </button>
-        <p className="text-sm font-medium">
+        <p className="text-sm font-semibold">
           {MONTHS[cursor.getMonth()]} {cursor.getFullYear()}
         </p>
         <button
           type="button"
           onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1))}
-          className="p-1.5 rounded hover:bg-anthracite/5 transition-colors duration-200 ease-premium"
+          className="p-1.5 hover:bg-surface transition-colors"
           aria-label="Mois suivant"
         >
-          <ChevronRight weight="light" size={18} />
+          <ChevronRight size={18} strokeWidth={2} />
         </button>
       </div>
 
-      <div className="grid grid-cols-7 gap-1 text-center text-[10px] uppercase text-anthracite/40 mb-1">
+      <div className="grid grid-cols-7 gap-1 text-center text-[10px] uppercase text-ink/40 mb-1">
         {WEEKDAYS.map((w) => (
           <div key={w}>{w}</div>
         ))}
@@ -133,18 +133,18 @@ export default function AvailabilityCalendar({
                   : undefined
               }
               className={clsx(
-                "relative aspect-square rounded-md text-xs flex items-center justify-center transition-colors duration-200 ease-premium",
-                disabled && "text-anthracite/25 cursor-not-allowed line-through",
-                !disabled && !isSelected && "hover:bg-anthracite/5",
-                isSelected && "bg-or text-noir font-medium"
+                "relative aspect-square text-xs flex items-center justify-center transition-colors",
+                disabled && "text-ink/25 cursor-not-allowed line-through",
+                !disabled && !isSelected && "hover:bg-surface",
+                isSelected && "bg-accent text-bg font-semibold"
               )}
             >
               {day.getDate()}
               {status === "partial" && !disabled && (
                 <span
                   className={clsx(
-                    "absolute bottom-1 h-1 w-1 rounded-full",
-                    isSelected ? "bg-noir" : "bg-red-400"
+                    "absolute bottom-1 h-1 w-1",
+                    isSelected ? "bg-bg" : "bg-red-500"
                   )}
                 />
               )}
@@ -153,13 +153,13 @@ export default function AvailabilityCalendar({
         })}
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] text-anthracite/45">
+      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] text-ink/45">
         <span className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
+          <span className="h-1.5 w-1.5 bg-red-500" />
           Horaires restreints
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="text-anthracite/30 line-through">12</span>
+          <span className="text-ink/30 line-through">12</span>
           Journée indisponible
         </span>
       </div>

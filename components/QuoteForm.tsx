@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle as CheckCircle2 } from "@phosphor-icons/react/dist/ssr";
+import { CheckCircle2 } from "lucide-react";
 import { SERVICE_LABELS } from "@/lib/types";
 import type { ServiceType } from "@/lib/types";
 import { CONTACT } from "@/lib/constants";
@@ -50,14 +50,14 @@ export default function QuoteForm() {
 
   if (done) {
     return (
-      <div className="card p-10 sm:p-14 text-center">
-        <CheckCircle2 weight="light" size={52} className="text-or mx-auto mb-6" />
+      <div className="card border-2 border-divider p-10 sm:p-14 text-center">
+        <CheckCircle2 size={52} strokeWidth={2} className="text-accent mx-auto mb-6" />
         <h2 className="heading-md mb-4">Votre demande a bien été envoyée</h2>
-        <p className="text-anthracite/60 leading-relaxed mb-8">
+        <p className="text-ink/60 leading-relaxed mb-8">
           Merci {firstName}, votre chauffeur va étudier votre demande et reviendra vers vous
           rapidement avec une proposition adaptée.
         </p>
-        <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="btn-dark">
+        <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="btn-primary">
           Appeler directement
         </a>
       </div>
@@ -65,7 +65,7 @@ export default function QuoteForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="card p-6 sm:p-10 space-y-6">
+    <form onSubmit={handleSubmit} className="card border-2 border-divider p-6 sm:p-10 space-y-6">
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label className="label-field">Prénom</label>

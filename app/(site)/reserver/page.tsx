@@ -19,12 +19,12 @@ export default async function ReserverPage() {
   ]);
 
   return (
-    <section className="section-padding bg-creme min-h-screen pt-32">
+    <section className="bg-bg min-h-screen py-16 sm:pt-24">
       <div className="container-site">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="eyebrow justify-center">Réservation</span>
+        <div className="max-w-2xl mb-14">
+          <span className="eyebrow">Réservation</span>
           <h1 className="heading-lg mt-3 mb-4">Organisez votre trajet en 5 étapes</h1>
-          <p className="text-anthracite/60">
+          <p className="text-ink/60">
             Renseignez les informations ci-dessous, votre chauffeur confirmera votre demande
             rapidement.
           </p>

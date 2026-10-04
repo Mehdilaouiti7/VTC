@@ -97,7 +97,7 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
   }
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(360px,1fr))]">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))]">
       <div className="border-r-2 border-divider px-8 py-7 min-w-0">
         <h2 className="text-xl font-display font-extrabold mb-6">Bloquer un créneau</h2>
         <form onSubmit={handleAdd} className="space-y-4">

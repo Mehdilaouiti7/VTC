@@ -9,12 +9,12 @@ export const metadata: Metadata = {
 
 export default function DevisPage() {
   return (
-    <section className="section-padding bg-creme min-h-screen pt-32">
-      <div className="container-site max-w-2xl mx-auto">
-        <div className="text-center mb-14">
-          <span className="eyebrow justify-center">Demande personnalisée</span>
+    <section className="bg-bg min-h-screen py-16 sm:pt-24">
+      <div className="container-site max-w-2xl">
+        <div className="mb-14">
+          <span className="eyebrow">Demande personnalisée</span>
           <h1 className="heading-lg mt-3 mb-4">Créer une demande de devis</h1>
-          <p className="text-anthracite/60">
+          <p className="text-ink/60">
             Plusieurs arrêts, attente sur place, trajet professionnel, transfert aller-retour,
             mise à disposition pour plusieurs heures ou journée complète : indiquez-nous
             simplement vos besoins.

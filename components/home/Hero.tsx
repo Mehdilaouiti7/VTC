@@ -60,7 +60,7 @@ export default function Hero() {
 
       <div
         className="grid border-t-2 border-divider"
-        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}
+        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 200px), 1fr))" }}
       >
         {STRIP.map((item, i) => (
           <div
