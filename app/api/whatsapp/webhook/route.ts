@@ -11,9 +11,9 @@ import type { ServiceType } from "@/lib/types";
 // same createBooking() used by /api/bookings. Conversation progress is kept
 // in public.whatsapp_sessions, keyed by the customer's WhatsApp number.
 //
-// Meta setup needed before this does anything (see .env.example):
-//   - WHATSAPP_API_TOKEN / WHATSAPP_PHONE_NUMBER_ID (already used for
-//     notifications)
+// Meta setup needed before this does anything (see .env.example) — note
+// that the booking/driver notifications in lib/whatsapp.ts no longer need
+// this, they use WaSenderAPI (WASENDER_API_TOKEN) instead:
 //   - WHATSAPP_VERIFY_TOKEN: any string you choose, entered in Meta's
 //     webhook configuration screen alongside this route's URL
 //   - In Meta's app dashboard, point the webhook at
