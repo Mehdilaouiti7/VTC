@@ -1,22 +1,13 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Outfit } from "next/font/google";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 
-// "Midnight Galaxy" theme (Anthropic theme-factory skill) pairs a single
-// modern sans-serif family across headers and body — Space Grotesk stands in
-// for the theme's system "FreeSans Bold" spec with a more distinctive,
-// web-native display weight for headings.
-const spaceGrotesk = Space_Grotesk({
+// "Modernist" design system: a single Archivo family across headers and
+// body, flat/architectural, zero border radius, single red accent.
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-  weight: ["300", "400", "500", "600"],
+  variable: "--font-archivo",
+  weight: ["400", "600", "800"],
   display: "swap",
 });
 
@@ -50,7 +41,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${spaceGrotesk.variable} ${outfit.variable}`}>
+    <html lang="fr" className={archivo.variable}>
       <body>{children}</body>
     </html>
   );

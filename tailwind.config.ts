@@ -4,53 +4,58 @@ const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      // Neutral charcoal/zinc base with a single desaturated emerald accent —
-      // token names kept stable (inherited from an earlier purple theme) so
-      // the rest of the app didn't need touching, only the hex values changed.
+      // "Modernist" design system — flat, architectural, zero radius, a
+      // single red accent on a light gray ground. Old token names kept as
+      // aliases (noir/anthracite/creme/or) pointing at the new values so a
+      // partial migration doesn't break, but every value changed.
       colors: {
-        noir: "#1c1c1e",
-        anthracite: "#27272a",
-        anthracite2: "#3a3a3f",
-        creme: "#f7f6f3",
-        creme2: "#efece6",
-        or: "#0d8f6a",
-        "or-light": "#2fac85",
-        beige: "#6b6f76",
+        bg: "#f3f2f2",
+        surface: "#eae9e9",
+        ink: "#201e1d",
+        accent: {
+          DEFAULT: "#ec3013",
+          100: "#fff2ef",
+          200: "#ffe0d9",
+          300: "#ffc4b8",
+          400: "#ff9783",
+          500: "#ff563c",
+          600: "#dd2b0f",
+          700: "#ae1800",
+          800: "#7c1405",
+          900: "#4d170e",
+        },
+        divider: "color-mix(in srgb, #201e1d 40%, transparent)",
+        neutral: {
+          100: "#f8f4f4",
+          200: "#eae7e7",
+          300: "#d7d3d3",
+          400: "#bab6b6",
+          500: "#9b9797",
+          600: "#7d7979",
+          700: "#605d5d",
+          800: "#444141",
+          900: "#2d2b2b",
+        },
+        // Aliases for a smaller diff on files not yet migrated.
+        noir: "#201e1d",
+        anthracite: "#201e1d",
+        anthracite2: "#605d5d",
+        creme: "#f3f2f2",
+        creme2: "#eae9e9",
+        or: "#ec3013",
+        "or-light": "#ff563c",
+        beige: "#605d5d",
       },
       fontFamily: {
-        display: ["var(--font-display)", "sans-serif"],
-        sans: ["var(--font-outfit)", "sans-serif"],
-      },
-      boxShadow: {
-        soft: "0 20px 50px -20px rgba(18,18,20,0.32)",
-        deep: "0 30px 70px -25px rgba(10,10,12,0.6)",
-        gold: "0 0 0 1px rgba(13,143,106,0.35)",
-        "inner-edge": "inset 0 1px 0 0 rgba(255,255,255,0.06)",
+        display: ["var(--font-archivo)", "sans-serif"],
+        sans: ["var(--font-archivo)", "sans-serif"],
       },
       borderRadius: {
-        xl2: "1.1rem",
+        none: "0px",
+        xl2: "0px",
       },
-      transitionTimingFunction: {
-        premium: "cubic-bezier(0.16, 1, 0.3, 1)",
-      },
-      animation: {
-        fadeUp: "fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-        fadeIn: "fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-        kenburns: "kenburns 18s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-      },
-      keyframes: {
-        fadeUp: {
-          "0%": { opacity: "0", transform: "translateY(26px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        fadeIn: {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
-        },
-        kenburns: {
-          "0%": { transform: "scale(1)" },
-          "100%": { transform: "scale(1.08)" },
-        },
+      boxShadow: {
+        none: "none",
       },
     },
   },
