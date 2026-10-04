@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { estimatePrice } from "@/lib/pricing";
 import { sendBookingEmails } from "@/lib/email";
-import { sendBookingReceivedWhatsApp } from "@/lib/whatsapp";
+import { sendBookingReceivedWhatsApp, sendBookingReceivedDriverWhatsApp } from "@/lib/whatsapp";
 import type { Booking, PricingRule } from "@/lib/types";
 import type { BookingInput } from "@/lib/validation";
 
@@ -47,7 +47,10 @@ export async function createBooking(
   const booking = data as Booking;
   sendBookingEmails(booking).catch((err) => console.error("Erreur envoi email réservation", err));
   sendBookingReceivedWhatsApp(booking).catch((err) =>
-    console.error("Erreur envoi WhatsApp réservation", err)
+    console.error("Erreur envoi WhatsApp réservation (client)", err)
+  );
+  sendBookingReceivedDriverWhatsApp(booking).catch((err) =>
+    console.error("Erreur envoi WhatsApp réservation (chauffeur)", err)
   );
 
   return { booking };

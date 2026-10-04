@@ -24,6 +24,8 @@ import type { Booking, QuoteRequest } from "@/lib/types";
 //   devis_refuse            (1 var) "Bonjour {{1}}, nous ne sommes
 //     malheureusement pas en mesure de répondre à votre demande de devis.
 //     N'hésitez pas à nous contacter directement pour en discuter."
+//   reservation_recue_chauffeur (5 vars) "Nouvelle demande de réservation de
+//     {{1}} pour le {{2}} à {{3}}. Trajet : {{4}}. Téléphone client : {{5}}."
 //
 // Until WHATSAPP_API_TOKEN / WHATSAPP_PHONE_NUMBER_ID are set, every call
 // here is a silent no-op — same graceful-degradation pattern as lib/email.ts.
@@ -122,6 +124,25 @@ export async function sendBookingReceivedWhatsApp(booking: Booking) {
       formatDate(booking.date),
       booking.time,
       `${booking.pickup_address} → ${booking.dropoff_address}`,
+    ]
+  );
+}
+
+// Recap sent to the driver's own WhatsApp (NOTIFY_ADMIN_WHATSAPP) every time
+// a new booking request comes in — mirrors sendBookingEmails' admin email.
+export async function sendBookingReceivedDriverWhatsApp(booking: Booking) {
+  const driverNumber = process.env.NOTIFY_ADMIN_WHATSAPP;
+  if (!driverNumber) return;
+
+  await sendTemplate(
+    driverNumber,
+    process.env.WHATSAPP_TEMPLATE_BOOKING_RECEIVED_DRIVER || "reservation_recue_chauffeur",
+    [
+      `${booking.first_name} ${booking.last_name}`,
+      formatDate(booking.date),
+      booking.time,
+      `${booking.pickup_address} → ${booking.dropoff_address}`,
+      booking.phone,
     ]
   );
 }
