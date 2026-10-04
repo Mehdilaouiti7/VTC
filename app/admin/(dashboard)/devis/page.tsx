@@ -18,7 +18,7 @@ export default async function DevisAdminPage() {
           Aucune demande de devis pour le moment.
         </div>
       ) : (
-        <div className="grid sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {(quotes as QuoteRequest[]).map((q) => (
             <QuoteCard key={q.id} quote={q} />
           ))}

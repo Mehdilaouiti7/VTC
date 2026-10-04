@@ -31,7 +31,7 @@ export default async function AdminDashboard() {
     <div>
       <h1 className="heading-md mb-8">Tableau de bord</h1>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
         {stats.map((stat) => (
           <Link key={stat.label} href={stat.href} className="card p-6 hover:-translate-y-0.5 transition-transform">
             <p className="text-3xl font-display text-anthracite mb-1">{stat.value}</p>

@@ -135,7 +135,7 @@
   }
 
   .input-field {
-    @apply w-full rounded-lg border border-anthracite2/15 bg-white px-4 py-3 text-sm text-anthracite placeholder:text-anthracite/35 outline-none;
+    @apply w-full min-w-0 rounded-lg border border-anthracite2/15 bg-white px-4 py-3 text-sm text-anthracite placeholder:text-anthracite/35 outline-none;
     transition: border-color 200ms var(--ease-premium), box-shadow 200ms var(--ease-premium);
   }
 

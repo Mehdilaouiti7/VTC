@@ -39,8 +39,8 @@ export default function BookingDetail({ booking }: { booking: Booking }) {
   const waNumber = booking.phone.replace(/[^\d]/g, "");
 
   return (
-    <div className="grid lg:grid-cols-3 gap-8">
-      <div className="order-first lg:order-last space-y-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="order-first lg:order-last space-y-6 min-w-0">
         <div className="card p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-display text-lg">Actions</h3>
@@ -136,14 +136,14 @@ export default function BookingDetail({ booking }: { booking: Booking }) {
         </div>
       </div>
 
-      <div className="lg:col-span-2 space-y-6">
+      <div className="lg:col-span-2 space-y-6 min-w-0">
         <div className="card p-6 sm:p-8">
           <div className="flex items-center justify-between mb-6">
             <h2 className="font-display text-xl">Détails du trajet</h2>
             <StatusBadge status={booking.status} />
           </div>
 
-          <dl className="grid sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
             <Info label="Service" value={SERVICE_LABELS[booking.service_type]} />
             <Info label="Type de trajet" value={booking.trip_type.replace(/_/g, " ")} />
             <Info label="Départ" value={booking.pickup_address} />
@@ -176,7 +176,7 @@ export default function BookingDetail({ booking }: { booking: Booking }) {
 
         <div className="card p-6 sm:p-8">
           <h2 className="font-display text-xl mb-6">Client</h2>
-          <dl className="grid sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
             <Info label="Nom" value={`${booking.first_name} ${booking.last_name}`} />
             <Info label="Téléphone" value={booking.phone} />
             <Info label="Email" value={booking.email} />

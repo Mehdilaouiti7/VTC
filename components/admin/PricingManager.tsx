@@ -35,7 +35,7 @@ function RuleForm({ rule }: { rule: PricingRule }) {
   return (
     <div className="card p-6">
       <h3 className="font-display text-lg mb-4">{rule.label}</h3>
-      <div className="grid sm:grid-cols-3 gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
         <div>
           <label className="label-field">Prix de base (€)</label>
           <input

@@ -45,8 +45,8 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
   }
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8">
-      <div className="card p-6 sm:p-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="card p-6 sm:p-8 min-w-0">
         <h2 className="font-display text-xl mb-6">Bloquer un créneau</h2>
         <form onSubmit={handleAdd} className="space-y-4">
           <div>
