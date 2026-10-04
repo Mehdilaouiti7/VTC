@@ -1,4 +1,4 @@
-import { Phone, Mail, MessageCircle, ArrowUpRight } from "lucide-react";
+import { Phone, EnvelopeSimple as Mail, ChatCircle as MessageCircle, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { CONTACT } from "@/lib/constants";
 import Reveal from "@/components/Reveal";
 
@@ -17,28 +17,33 @@ export default function ContactSection() {
 
         <div className="grid lg:grid-cols-[1.2fr_1fr] gap-6">
           <Reveal>
-            <a
-              href={`https://wa.me/${CONTACT.whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card-dark group flex h-full flex-col justify-between p-8 sm:p-10"
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-or/15">
-                  <MessageCircle size={22} className="text-or" />
+            <div className="bezel-dark h-full">
+              <a
+                href={`https://wa.me/${CONTACT.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bezel-inner group flex h-full flex-col justify-between bg-anthracite p-8 sm:p-10"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-or/15">
+                    <MessageCircle weight="light" size={22} className="text-or" />
+                  </div>
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 transition-all duration-300 ease-premium group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:bg-or/15">
+                    <ArrowUpRight
+                      weight="light"
+                      size={17}
+                      className="text-creme/60 transition-colors duration-300 ease-premium group-hover:text-or"
+                    />
+                  </span>
                 </div>
-                <ArrowUpRight
-                  size={20}
-                  className="text-creme/40 transition-transform duration-300 ease-premium group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-or"
-                />
-              </div>
-              <div className="mt-10">
-                <h3 className="font-display text-2xl text-creme mb-2">Discuter sur WhatsApp</h3>
-                <p className="text-sm text-creme/55 leading-relaxed max-w-xs">
-                  La réponse la plus rapide — on vous répond directement, sans détour.
-                </p>
-              </div>
-            </a>
+                <div className="mt-10">
+                  <h3 className="font-display text-2xl text-creme mb-2">Discuter sur WhatsApp</h3>
+                  <p className="text-sm text-creme/55 leading-relaxed max-w-xs">
+                    La réponse la plus rapide — on vous répond directement, sans détour.
+                  </p>
+                </div>
+              </a>
+            </div>
           </Reveal>
 
           <Reveal delay={100}>
@@ -47,7 +52,7 @@ export default function ContactSection() {
                 href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
                 className="group flex items-center gap-4 p-6 sm:p-7 transition-colors duration-300 ease-premium hover:bg-creme/60"
               >
-                <Phone size={18} className="text-or shrink-0" />
+                <Phone weight="light" size={18} className="text-or shrink-0" />
                 <div className="min-w-0">
                   <p className="text-xs uppercase tracking-wider text-anthracite/45 mb-0.5">
                     Téléphone
@@ -59,7 +64,7 @@ export default function ContactSection() {
                 href={`mailto:${CONTACT.email}`}
                 className="group flex items-center gap-4 p-6 sm:p-7 transition-colors duration-300 ease-premium hover:bg-creme/60"
               >
-                <Mail size={18} className="text-or shrink-0" />
+                <Mail weight="light" size={18} className="text-or shrink-0" />
                 <div className="min-w-0">
                   <p className="text-xs uppercase tracking-wider text-anthracite/45 mb-0.5">Email</p>
                   <p className="text-sm font-medium text-anthracite truncate">{CONTACT.email}</p>

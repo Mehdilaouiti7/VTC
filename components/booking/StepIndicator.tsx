@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check } from "@phosphor-icons/react/dist/ssr";
 import clsx from "clsx";
 
 const STEPS = ["Trajet", "Date & horaires", "Vos besoins", "Coordonnées", "Récapitulatif"];
@@ -26,7 +26,7 @@ export default function StepIndicator({ current }: { current: number }) {
                     !active && !done && "border-anthracite/15 text-anthracite/40"
                   )}
                 >
-                  {done ? <Check size={15} /> : stepNum}
+                  {done ? <Check weight="light" size={15} /> : stepNum}
                 </div>
                 <span
                   className={clsx(

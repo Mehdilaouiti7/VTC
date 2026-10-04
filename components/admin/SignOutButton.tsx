@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { LogOut } from "lucide-react";
+import { SignOut as LogOut } from "@phosphor-icons/react/dist/ssr";
 import { createClient } from "@/lib/supabase/client";
 
 export default function SignOutButton() {
@@ -19,7 +19,7 @@ export default function SignOutButton() {
       onClick={handleSignOut}
       className="flex items-center gap-2 text-sm text-creme/60 hover:text-or transition-colors"
     >
-      <LogOut size={16} />
+      <LogOut weight="light" size={16} />
       Déconnexion
     </button>
   );

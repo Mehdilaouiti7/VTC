@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Check, X, Save } from "lucide-react";
+import { Check, X, FloppyDisk as Save } from "@phosphor-icons/react/dist/ssr";
 import type { Booking, BookingStatus, PaymentStatus } from "@/lib/types";
 import { SERVICE_LABELS } from "@/lib/types";
 import StatusBadge from "@/components/admin/StatusBadge";
@@ -96,14 +96,14 @@ export default function BookingDetail({ booking }: { booking: Booking }) {
               onClick={() => updateStatus("confirmed")}
               className="btn-primary !py-2.5 w-full disabled:opacity-40"
             >
-              <Check size={16} /> Confirmer
+              <Check weight="light" size={16} /> Confirmer
             </button>
             <button
               disabled={saving || booking.status === "refused"}
               onClick={() => updateStatus("refused")}
               className="btn-dark !bg-red-600/90 hover:!bg-red-600 !border-red-600 !py-2.5 w-full disabled:opacity-40"
             >
-              <X size={16} /> Refuser
+              <X weight="light" size={16} /> Refuser
             </button>
             <button
               disabled={saving || booking.status === "completed"}
@@ -148,7 +148,7 @@ export default function BookingDetail({ booking }: { booking: Booking }) {
             />
           </div>
           <button onClick={saveDetails} disabled={saving} className="btn-dark w-full !py-2.5 disabled:opacity-60">
-            <Save size={16} /> Enregistrer
+            <Save weight="light" size={16} /> Enregistrer
           </button>
         </div>
       </div>

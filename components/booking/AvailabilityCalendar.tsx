@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { CaretLeft as ChevronLeft, CaretRight as ChevronRight } from "@phosphor-icons/react/dist/ssr";
 import clsx from "clsx";
 import type { BlockedSlot } from "@/lib/types";
 
@@ -89,7 +89,7 @@ export default function AvailabilityCalendar({
           className="p-1.5 rounded hover:bg-anthracite/5 transition-colors duration-200 ease-premium"
           aria-label="Mois précédent"
         >
-          <ChevronLeft size={18} />
+          <ChevronLeft weight="light" size={18} />
         </button>
         <p className="text-sm font-medium">
           {MONTHS[cursor.getMonth()]} {cursor.getFullYear()}
@@ -100,7 +100,7 @@ export default function AvailabilityCalendar({
           className="p-1.5 rounded hover:bg-anthracite/5 transition-colors duration-200 ease-premium"
           aria-label="Mois suivant"
         >
-          <ChevronRight size={18} />
+          <ChevronRight weight="light" size={18} />
         </button>
       </div>
 

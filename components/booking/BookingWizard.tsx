@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Plus, Trash2, CheckCircle2 } from "lucide-react";
+import { Plus, Trash as Trash2, CheckCircle as CheckCircle2 } from "@phosphor-icons/react/dist/ssr";
 import clsx from "clsx";
 import StepIndicator from "./StepIndicator";
 import AvailabilityCalendar from "./AvailabilityCalendar";
@@ -201,7 +201,7 @@ export default function BookingWizard({
   if (confirmed) {
     return (
       <div className="card step-enter max-w-xl mx-auto p-10 sm:p-14 text-center">
-        <CheckCircle2 size={52} className="text-or mx-auto mb-6" />
+        <CheckCircle2 weight="light" size={52} className="text-or mx-auto mb-6" />
         <h2 className="heading-md mb-4">Votre demande a bien été envoyée</h2>
         <p className="text-anthracite/60 leading-relaxed mb-8">
           Merci {form.first_name}, nous avons bien reçu votre demande de réservation. Votre
@@ -310,7 +310,7 @@ export default function BookingWizard({
                     onClick={addStop}
                     className="flex items-center gap-1 text-xs text-or hover:underline"
                   >
-                    <Plus size={14} /> Ajouter une étape
+                    <Plus weight="light" size={14} /> Ajouter une étape
                   </button>
                 )}
               </div>
@@ -331,7 +331,7 @@ export default function BookingWizard({
                       className="shrink-0 text-anthracite/40 hover:text-red-500"
                       aria-label="Supprimer l'étape"
                     >
-                      <Trash2 size={18} />
+                      <Trash2 weight="light" size={18} />
                     </button>
                   </div>
                 ))}

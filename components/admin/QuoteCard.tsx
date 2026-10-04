@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, X } from "lucide-react";
+import { Check, X } from "@phosphor-icons/react/dist/ssr";
 import type { QuoteRequest } from "@/lib/types";
 import { SERVICE_LABELS } from "@/lib/types";
 import StatusBadge from "@/components/admin/StatusBadge";
@@ -59,14 +59,14 @@ export default function QuoteCard({ quote }: { quote: QuoteRequest }) {
             onClick={() => updateStatus("confirmed")}
             className="btn-primary !py-2 !px-4 text-xs disabled:opacity-40"
           >
-            <Check size={14} /> Traité / Devis envoyé
+            <Check weight="light" size={14} /> Traité / Devis envoyé
           </button>
           <button
             disabled={saving}
             onClick={() => updateStatus("refused")}
             className="btn-secondary !text-anthracite !border-anthracite/20 !py-2 !px-4 text-xs disabled:opacity-40"
           >
-            <X size={14} /> Refuser
+            <X weight="light" size={14} /> Refuser
           </button>
         </div>
       )}

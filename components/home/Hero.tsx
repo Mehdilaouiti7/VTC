@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, Lightning } from "@phosphor-icons/react/dist/ssr";
 
 export default function Hero() {
   return (
     <section id="accueil" className="relative min-h-[92dvh] flex items-end overflow-hidden bg-noir">
       <div className="absolute inset-0 animate-kenburns">
         <Image
-          src="https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=2400&auto=format&fit=crop"
-          alt="Véhicule de chauffeur privé haut de gamme"
+          src="https://images.unsplash.com/photo-1536700503339-1e4b06520771?q=80&w=2400&auto=format&fit=crop"
+          alt="Tesla Model S du chauffeur, à l'arrêt de nuit"
           fill
           priority
           className="object-cover object-center opacity-80"
@@ -19,7 +20,13 @@ export default function Hero() {
 
       <div className="container-site relative z-10 pb-24 pt-24 sm:pb-32 sm:pt-48">
         <div className="max-w-3xl">
-          <span className="eyebrow mb-4 sm:mb-6 reveal in-view">Chauffeur privé indépendant</span>
+          <div className="flex flex-wrap items-center gap-3 mb-4 sm:mb-6 reveal in-view">
+            <span className="eyebrow !mb-0">Chauffeur privé indépendant</span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-or/15 border border-or/25 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-or font-medium">
+              <Lightning weight="fill" size={11} />
+              Tesla Model S
+            </span>
+          </div>
           <h1 className="heading-xl text-creme mb-4 sm:mb-6 reveal in-view" style={{ animationDelay: "80ms" }}>
             Votre chauffeur privé, <br className="hidden sm:block" />
             directement avec vous.
@@ -29,11 +36,14 @@ export default function Hero() {
             style={{ animationDelay: "160ms" }}
           >
             Déplacements professionnels, transferts aéroport, trajets privés et mise à
-            disposition. Réservez votre chauffeur selon vos horaires et vos besoins.
+            disposition — à bord d&apos;une Tesla Model S silencieuse et toujours impeccable.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 reveal in-view" style={{ animationDelay: "240ms" }}>
-            <Link href="/reserver" className="btn-primary">
+            <Link href="/reserver" className="group flex items-center justify-center gap-3 rounded-full bg-or py-3.5 pl-7 pr-2.5 text-sm font-medium tracking-wide text-noir transition-all duration-300 ease-premium hover:-translate-y-0.5 active:scale-[0.98]">
               Réserver un trajet
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-noir/10 transition-transform duration-300 ease-premium group-hover:translate-x-0.5">
+                <ArrowRight weight="bold" size={15} />
+              </span>
             </Link>
             <Link href="/devis" className="btn-secondary">
               Demander un devis

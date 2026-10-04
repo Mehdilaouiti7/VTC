@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Trash2, Plus } from "lucide-react";
+import { Trash as Trash2, Plus } from "@phosphor-icons/react/dist/ssr";
 import type { BlockedSlot } from "@/lib/types";
 
 export default function AvailabilityManager({ blockedSlots }: { blockedSlots: BlockedSlot[] }) {
@@ -80,7 +80,7 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
           </div>
           {error && <p className="text-sm text-red-500">{error}</p>}
           <button type="submit" disabled={saving} className="btn-dark w-full disabled:opacity-60">
-            <Plus size={16} /> Ajouter ce blocage
+            <Plus weight="light" size={16} /> Ajouter ce blocage
           </button>
         </form>
       </div>
@@ -104,7 +104,7 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
                   className="text-anthracite/40 hover:text-red-500 shrink-0"
                   aria-label="Supprimer"
                 >
-                  <Trash2 size={17} />
+                  <Trash2 weight="light" size={17} />
                 </button>
               </li>
             ))}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Save } from "lucide-react";
+import { FloppyDisk as Save } from "@phosphor-icons/react/dist/ssr";
 import type { PricingRule } from "@/lib/types";
 
 function RuleForm({ rule }: { rule: PricingRule }) {
@@ -74,7 +74,7 @@ function RuleForm({ rule }: { rule: PricingRule }) {
         />
       </div>
       <button onClick={handleSave} disabled={saving} className="btn-dark !py-2.5 text-sm disabled:opacity-60">
-        <Save size={15} /> {saving ? "Enregistrement..." : saved ? "Enregistré ✓" : "Enregistrer"}
+        <Save weight="light" size={15} /> {saving ? "Enregistrement..." : saved ? "Enregistré ✓" : "Enregistrer"}
       </button>
     </div>
   );

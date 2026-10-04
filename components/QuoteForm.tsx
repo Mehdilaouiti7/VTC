@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle as CheckCircle2 } from "@phosphor-icons/react/dist/ssr";
 import { SERVICE_LABELS } from "@/lib/types";
 import type { ServiceType } from "@/lib/types";
 import { CONTACT } from "@/lib/constants";
@@ -51,7 +51,7 @@ export default function QuoteForm() {
   if (done) {
     return (
       <div className="card p-10 sm:p-14 text-center">
-        <CheckCircle2 size={52} className="text-or mx-auto mb-6" />
+        <CheckCircle2 weight="light" size={52} className="text-or mx-auto mb-6" />
         <h2 className="heading-md mb-4">Votre demande a bien été envoyée</h2>
         <p className="text-anthracite/60 leading-relaxed mb-8">
           Merci {firstName}, votre chauffeur va étudier votre demande et reviendra vers vous

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
-import { MapPin, Calendar, Clock, Users, ArrowLeftRight } from "lucide-react";
+import { MapPin, Calendar, Clock, Users, ArrowsLeftRight as ArrowLeftRight } from "@phosphor-icons/react/dist/ssr";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 
 export default function QuickBookingForm() {
@@ -67,7 +67,7 @@ export default function QuickBookingForm() {
                 onChange={setPickup}
                 placeholder="Adresse, aéroport, gare..."
                 className="input-field pl-10"
-                icon={<MapPin size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />}
+                icon={<MapPin weight="light" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />}
               />
             </div>
 
@@ -79,14 +79,14 @@ export default function QuickBookingForm() {
                 onChange={setDropoff}
                 placeholder="Adresse d'arrivée"
                 className="input-field pl-10"
-                icon={<ArrowLeftRight size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />}
+                icon={<ArrowLeftRight weight="light" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />}
               />
             </div>
 
             <div>
               <label className="label-field">Date</label>
               <div className="relative">
-                <Calendar size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
+                <Calendar weight="light" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
                 <input
                   required
                   type="date"
@@ -101,7 +101,7 @@ export default function QuickBookingForm() {
             <div>
               <label className="label-field">Heure</label>
               <div className="relative">
-                <Clock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
+                <Clock weight="light" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
                 <input
                   required
                   type="time"
@@ -117,7 +117,7 @@ export default function QuickBookingForm() {
             <div className="w-full sm:w-48">
               <label className="label-field">Passagers</label>
               <div className="relative">
-                <Users size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
+                <Users weight="light" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
                 <input
                   required
                   type="number"

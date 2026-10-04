@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { CaretLeft as ChevronLeft, CaretRight as ChevronRight } from "@phosphor-icons/react/dist/ssr";
 import clsx from "clsx";
 
 const WEEKDAYS = ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"];
@@ -62,7 +62,7 @@ export default function BookingsCalendar({ bookingDates }: { bookingDates: strin
           className="p-1.5 rounded hover:bg-anthracite/5"
           aria-label="Mois précédent"
         >
-          <ChevronLeft size={18} />
+          <ChevronLeft weight="light" size={18} />
         </button>
         <p className="font-display text-sm">
           {MONTHS[cursor.getMonth()]} {cursor.getFullYear()}
@@ -72,7 +72,7 @@ export default function BookingsCalendar({ bookingDates }: { bookingDates: strin
           className="p-1.5 rounded hover:bg-anthracite/5"
           aria-label="Mois suivant"
         >
-          <ChevronRight size={18} />
+          <ChevronRight weight="light" size={18} />
         </button>
       </div>
 

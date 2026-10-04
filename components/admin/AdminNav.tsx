@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, CalendarClock, FileText, CalendarX, Wallet } from "lucide-react";
+import { SquaresFour as LayoutDashboard, CalendarCheck as CalendarClock, FileText, CalendarX, Wallet } from "@phosphor-icons/react/dist/ssr";
 import clsx from "clsx";
 
 const LINKS = [

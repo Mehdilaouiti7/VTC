@@ -44,7 +44,7 @@ export const SERVICES = [
     key: "prive",
     title: "Trajets privés",
     description:
-      "Déplacez-vous librement avec un chauffeur réservé spécialement pour vous.",
+      "Déplacez-vous librement à bord de la Tesla Model S, réservée spécialement pour vous.",
     icon: "Car",
   },
   {
@@ -71,7 +71,7 @@ export const ADVANTAGES = [
   },
   {
     title: "Confort",
-    description: "Des véhicules haut de gamme, entretenus et pensés pour votre bien-être.",
+    description: "Une Tesla Model S silencieuse et spacieuse, entretenue et pensée pour votre bien-être.",
     icon: "Armchair",
   },
   {

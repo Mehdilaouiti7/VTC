@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, EnvelopeSimple as Mail, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { CONTACT, FOOTER_LINKS, SITE_NAME } from "@/lib/constants";
 
 export default function Footer() {
@@ -47,19 +47,19 @@ export default function Footer() {
           <h4 className="text-creme text-sm uppercase tracking-widest mb-5">Contact</h4>
           <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-2">
-              <Phone size={15} className="text-or" />
+              <Phone weight="light" size={15} className="text-or" />
               <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="hover:text-or">
                 {CONTACT.phone}
               </a>
             </li>
             <li className="flex items-center gap-2">
-              <Mail size={15} className="text-or" />
+              <Mail weight="light" size={15} className="text-or" />
               <a href={`mailto:${CONTACT.email}`} className="hover:text-or">
                 {CONTACT.email}
               </a>
             </li>
             <li className="flex items-center gap-2">
-              <MapPin size={15} className="text-or" />
+              <MapPin weight="light" size={15} className="text-or" />
               <span>Disponible sur réservation</span>
             </li>
           </ul>
