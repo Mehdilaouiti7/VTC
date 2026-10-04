@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FloppyDisk as Save } from "@phosphor-icons/react/dist/ssr";
+import { FloppyDisk as Save, Wallet } from "@phosphor-icons/react/dist/ssr";
 import type { PricingRule } from "@/lib/types";
 
 function RuleForm({ rule }: { rule: PricingRule }) {
@@ -34,7 +34,12 @@ function RuleForm({ rule }: { rule: PricingRule }) {
 
   return (
     <div className="card p-6">
-      <h3 className="font-display text-lg mb-4">{rule.label}</h3>
+      <div className="flex items-center gap-3 mb-4">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-or/15">
+          <Wallet weight="light" size={17} className="text-or" />
+        </div>
+        <h3 className="font-display text-lg">{rule.label}</h3>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
         <div>
           <label className="label-field">Prix de base (€)</label>

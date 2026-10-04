@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, X, Phone, WhatsappLogo, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
+import { Check, X, Phone, WhatsappLogo, EnvelopeSimple, UserCircle } from "@phosphor-icons/react/dist/ssr";
 import type { QuoteRequest } from "@/lib/types";
 import { SERVICE_LABELS } from "@/lib/types";
 import StatusBadge from "@/components/admin/StatusBadge";
@@ -27,13 +27,18 @@ export default function QuoteCard({ quote }: { quote: QuoteRequest }) {
   return (
     <div className="card p-6">
       <div className="flex items-start justify-between gap-4 mb-3">
-        <div>
-          <p className="font-medium">
-            {quote.first_name} {quote.last_name}
-          </p>
-          <p className="text-xs text-anthracite/50">
-            {quote.phone} — {quote.email}
-          </p>
+        <div className="flex items-start gap-3 min-w-0">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-noir/[0.06]">
+            <UserCircle weight="light" size={19} className="text-anthracite/60" />
+          </div>
+          <div className="min-w-0">
+            <p className="font-medium truncate">
+              {quote.first_name} {quote.last_name}
+            </p>
+            <p className="text-xs text-anthracite/50 truncate">
+              {quote.phone} — {quote.email}
+            </p>
+          </div>
         </div>
         <StatusBadge status={quote.status} />
       </div>

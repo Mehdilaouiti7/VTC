@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Check, X, FloppyDisk as Save, Phone, WhatsappLogo, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
+import { Check, X, FloppyDisk as Save, Phone, WhatsappLogo, EnvelopeSimple, CarProfile, UserCircle } from "@phosphor-icons/react/dist/ssr";
 import type { Booking, BookingStatus, PaymentStatus } from "@/lib/types";
 import { SERVICE_LABELS } from "@/lib/types";
 import StatusBadge from "@/components/admin/StatusBadge";
@@ -139,7 +139,12 @@ export default function BookingDetail({ booking }: { booking: Booking }) {
       <div className="lg:col-span-2 space-y-6 min-w-0">
         <div className="card p-6 sm:p-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-display text-xl">Détails du trajet</h2>
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-or/15">
+                <CarProfile weight="light" size={19} className="text-or" />
+              </div>
+              <h2 className="font-display text-xl">Détails du trajet</h2>
+            </div>
             <StatusBadge status={booking.status} />
           </div>
 
@@ -175,7 +180,12 @@ export default function BookingDetail({ booking }: { booking: Booking }) {
         </div>
 
         <div className="card p-6 sm:p-8">
-          <h2 className="font-display text-xl mb-6">Client</h2>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-noir/[0.06]">
+              <UserCircle weight="light" size={19} className="text-anthracite/60" />
+            </div>
+            <h2 className="font-display text-xl">Client</h2>
+          </div>
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
             <Info label="Nom" value={`${booking.first_name} ${booking.last_name}`} />
             <Info label="Téléphone" value={booking.phone} />

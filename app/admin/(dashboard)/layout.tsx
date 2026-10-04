@@ -33,7 +33,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
       <div className="flex-1 min-w-0">
         <header className="lg:hidden flex items-center justify-between bg-noir text-creme px-5 py-4">
-          <span className="font-display text-lg">{SITE_NAME}</span>
+          <span className="font-display text-lg">
+            {SITE_NAME}
+            <span className="text-or">.</span>
+          </span>
           <SignOutButton />
         </header>
         <div className="lg:hidden bg-noir/95 border-b border-white/10 px-2 py-2">
