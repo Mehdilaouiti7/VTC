@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
 import { bookingSchema } from "@/lib/validation";
-import { sendBookingEmails } from "@/lib/email";
-import { sendBookingReceivedWhatsApp } from "@/lib/whatsapp";
-import type { Booking } from "@/lib/types";
+import { createBooking } from "@/lib/bookings";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -16,32 +13,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const supabase = createClient();
-
-  const { data, error } = await supabase
-    .from("bookings")
-    .insert({
-      ...parsed.data,
-      return_date: parsed.data.return_date || null,
-      return_time: parsed.data.return_time || null,
-      duration_hours: parsed.data.duration_hours || null,
-      special_request: parsed.data.special_request || null,
-      comment: parsed.data.comment || null,
-    })
-    .select()
-    .single();
-
-  if (error) {
-    console.error("Erreur création réservation", error);
-    return NextResponse.json({ error: "Impossible de créer la réservation" }, { status: 500 });
+  const result = await createBooking(parsed.data);
+  if ("error" in result) {
+    return NextResponse.json({ error: result.error }, { status: 500 });
   }
 
-  sendBookingEmails(data as Booking).catch((err) =>
-    console.error("Erreur envoi email réservation", err)
-  );
-  sendBookingReceivedWhatsApp(data as Booking).catch((err) =>
-    console.error("Erreur envoi WhatsApp réservation", err)
-  );
-
-  return NextResponse.json({ booking: data }, { status: 201 });
+  return NextResponse.json({ booking: result.booking }, { status: 201 });
 }

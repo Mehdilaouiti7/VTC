@@ -79,6 +79,40 @@ async function sendTemplate(to: string, templateName: string, params: string[]) 
   }
 }
 
+// Free-form text — only usable to reply within an active conversation (the
+// customer messaged us within the last 24h). Used by the WhatsApp booking
+// bot; the template-based senders below remain the only option for
+// business-initiated messages outside that window.
+export async function sendWhatsAppText(to: string, body: string) {
+  const token = process.env.WHATSAPP_API_TOKEN;
+  const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
+  if (!token || !phoneNumberId) return;
+
+  try {
+    const res = await fetch(
+      `https://graph.facebook.com/${GRAPH_VERSION}/${phoneNumberId}/messages`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messaging_product: "whatsapp",
+          to: toWhatsAppNumber(to),
+          type: "text",
+          text: { body },
+        }),
+      }
+    );
+    if (!res.ok) {
+      console.error("Erreur envoi WhatsApp (texte)", await res.text());
+    }
+  } catch (error) {
+    console.error("Erreur envoi WhatsApp (texte)", error);
+  }
+}
+
 export async function sendBookingReceivedWhatsApp(booking: Booking) {
   await sendTemplate(
     booking.phone,
