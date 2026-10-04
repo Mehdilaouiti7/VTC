@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Trash as Trash2, Plus, Clock, CalendarX, NotePencil, Calendar } from "@phosphor-icons/react/dist/ssr";
+import { Trash2, Plus, Clock, PenLine } from "lucide-react";
 import type { BlockedSlot } from "@/lib/types";
 import AvailabilityCalendar from "@/components/booking/AvailabilityCalendar";
 
@@ -23,7 +23,7 @@ function TimeSelect({ value, onChange }: { value: string; onChange: (v: string) 
   const [h, m] = value.split(":");
   return (
     <div className="flex items-center gap-2">
-      <Clock weight="light" size={16} className="text-or shrink-0" />
+      <Clock size={16} strokeWidth={1.75} className="text-accent shrink-0" />
       <select
         className="input-field !w-[72px] !px-2 text-center"
         style={{ width: 72 }}
@@ -36,7 +36,7 @@ function TimeSelect({ value, onChange }: { value: string; onChange: (v: string) 
           </option>
         ))}
       </select>
-      <span className="text-anthracite/40">:</span>
+      <span className="text-ink/40">:</span>
       <select
         className="input-field !w-[72px] !px-2 text-center"
         style={{ width: 72 }}
@@ -97,14 +97,9 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <div className="card p-6 sm:p-8 min-w-0">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-or/15">
-            <CalendarX weight="light" size={19} className="text-or" />
-          </div>
-          <h2 className="font-display text-xl">Bloquer un créneau</h2>
-        </div>
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(360px,1fr))]">
+      <div className="border-r-2 border-divider px-8 py-7 min-w-0">
+        <h2 className="text-xl font-display font-extrabold mb-6">Bloquer un créneau</h2>
         <form onSubmit={handleAdd} className="space-y-4">
           <div className="space-y-2">
             <label className="label-field !mb-0">Indisponible du</label>
@@ -132,7 +127,11 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
           <div>
             <label className="label-field">Motif (optionnel)</label>
             <div className="relative">
-              <NotePencil weight="light" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
+              <PenLine
+                size={16}
+                strokeWidth={1.75}
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-accent pointer-events-none"
+              />
               <input
                 className="input-field pl-10"
                 value={reason}
@@ -141,45 +140,37 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
               />
             </div>
           </div>
-          {error && <p className="text-sm text-red-500">{error}</p>}
-          <button type="submit" disabled={saving} className="btn-primary w-full disabled:opacity-60">
-            <Plus weight="bold" size={16} /> Ajouter ce blocage
+          {error && <p className="text-sm font-semibold text-accent-700">{error}</p>}
+          <button type="submit" disabled={saving} className="btn-primary w-full !justify-center disabled:opacity-60">
+            <Plus size={16} strokeWidth={2} /> Ajouter ce blocage
           </button>
         </form>
       </div>
 
-      <div className="card p-6 sm:p-8 min-w-0">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-noir/[0.06]">
-            <Calendar weight="light" size={19} className="text-anthracite/60" />
-          </div>
-          <h2 className="font-display text-xl">Créneaux bloqués</h2>
-        </div>
+      <div className="px-8 py-7 min-w-0">
+        <h2 className="text-xl font-display font-extrabold mb-6">Créneaux bloqués</h2>
         {blockedSlots.length === 0 ? (
-          <div className="py-6 text-center">
-            <CalendarX weight="light" size={28} className="mx-auto mb-3 text-anthracite/25" />
-            <p className="text-sm text-anthracite/50">Aucun créneau bloqué actuellement.</p>
-          </div>
+          <p className="text-sm text-ink/50">Aucun créneau bloqué actuellement.</p>
         ) : (
-          <ul className="divide-y divide-anthracite/10">
+          <div className="border-t-2 border-divider">
             {blockedSlots.map((slot) => (
-              <li key={slot.id} className="flex items-center justify-between py-3 gap-3">
+              <div key={slot.id} className="flex items-center justify-between gap-3 py-4 border-b border-divider">
                 <div className="text-sm min-w-0">
-                  <p className="font-medium">
+                  <p className="font-semibold">
                     {new Date(slot.start_at).toLocaleString("fr-FR")} → {new Date(slot.end_at).toLocaleString("fr-FR")}
                   </p>
-                  {slot.reason && <p className="text-xs text-anthracite/50">{slot.reason}</p>}
+                  {slot.reason && <p className="text-xs text-ink/50 mt-0.5">{slot.reason}</p>}
                 </div>
                 <button
                   onClick={() => handleDelete(slot.id)}
-                  className="text-anthracite/40 hover:text-red-500 shrink-0"
+                  className="btn-icon btn-secondary shrink-0"
                   aria-label="Supprimer"
                 >
-                  <Trash2 weight="light" size={17} />
+                  <Trash2 size={17} strokeWidth={1.75} />
                 </button>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
     </div>

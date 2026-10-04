@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
+import { MessageCircle } from "lucide-react";
 import { CONTACT } from "@/lib/constants";
 
 export default function WhatsAppButton() {
@@ -34,9 +34,9 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contacter sur WhatsApp"
-      className="fixed bottom-5 left-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-soft transition-transform hover:scale-105 sm:hidden"
+      className="fixed bottom-5 left-5 z-50 flex h-14 w-14 items-center justify-center bg-ink transition-colors hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:hidden"
     >
-      <WhatsappLogo weight="fill" size={30} className="text-white" />
+      <MessageCircle size={26} strokeWidth={2} className="text-bg" />
     </a>
   );
 }

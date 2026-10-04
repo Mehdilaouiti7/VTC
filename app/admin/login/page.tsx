@@ -31,19 +31,21 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-noir flex items-center justify-center px-5">
-      <div className="w-full max-w-sm">
-        <div className="text-center mb-10">
-          <div className="font-display text-2xl text-creme mb-2">
+    <div className="min-h-screen bg-bg flex items-center px-8">
+      <div className="w-full max-w-[380px]">
+        <div className="mb-10">
+          <div className="font-display font-extrabold text-2xl">
             {SITE_NAME}
-            <span className="text-or">.</span>
+            <span className="text-accent">.</span>
           </div>
-          <p className="text-creme/50 text-sm uppercase tracking-widest">Espace administrateur</p>
+          <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-ink/50">
+            Espace administrateur
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="card bg-anthracite border border-white/5 p-8 space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="label-field !text-creme/50">Email</label>
+            <label className="label-field">Email</label>
             <input
               required
               type="email"
@@ -51,11 +53,11 @@ export default function AdminLoginPage() {
               placeholder="vous@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="input-field !bg-noir !text-creme !border-white/15 placeholder:!text-creme/25"
+              className="input-field"
             />
           </div>
           <div>
-            <label className="label-field !text-creme/50">Mot de passe</label>
+            <label className="label-field">Mot de passe</label>
             <input
               required
               type="password"
@@ -63,10 +65,10 @@ export default function AdminLoginPage() {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="input-field !bg-noir !text-creme !border-white/15 placeholder:!text-creme/25"
+              className="input-field"
             />
           </div>
-          {error && <p className="text-sm text-red-400">{error}</p>}
+          {error && <p className="text-sm font-semibold text-accent-700">{error}</p>}
           <button type="submit" disabled={loading} className="btn-primary w-full disabled:opacity-60">
             {loading ? "Connexion..." : "Se connecter"}
           </button>

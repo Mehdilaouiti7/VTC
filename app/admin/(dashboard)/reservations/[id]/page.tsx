@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
 import { createClient } from "@/lib/supabase/server";
 import BookingDetail from "@/components/admin/BookingDetail";
 import type { Booking } from "@/lib/types";
@@ -12,14 +10,10 @@ export default async function BookingDetailPage({ params }: { params: { id: stri
   if (!booking) notFound();
 
   return (
-    <div>
-      <Link href="/admin/reservations" className="inline-flex items-center gap-2 text-sm text-anthracite/50 hover:text-anthracite mb-6">
-        <ArrowLeft weight="light" size={16} /> Retour aux réservations
-      </Link>
-      <h1 className="heading-md mb-8">
-        {booking.first_name} {booking.last_name}
-      </h1>
-      <BookingDetail booking={booking as Booking} />
+    <div className="flex justify-center lg:justify-start">
+      <div className="w-full max-w-[520px] lg:border-l-2 border-divider">
+        <BookingDetail booking={booking as Booking} />
+      </div>
     </div>
   );
 }

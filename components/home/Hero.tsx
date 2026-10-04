@@ -1,61 +1,77 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Lightning } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight, Zap } from "lucide-react";
+
+const STRIP = [
+  { index: "01", label: "Réservation directe" },
+  { index: "02", label: "Chauffeur professionnel" },
+  { index: "03", label: "Service personnalisé" },
+  { index: "04", label: "Sans intermédiaire" },
+];
 
 export default function Hero() {
   return (
-    <section id="accueil" className="relative min-h-[92dvh] flex items-end overflow-hidden bg-noir">
-      <div className="absolute inset-0 animate-kenburns">
-        <Image
-          src="https://images.unsplash.com/photo-1536700503339-1e4b06520771?q=80&w=2400&auto=format&fit=crop"
-          alt="Tesla Model S du chauffeur, à l'arrêt de nuit"
-          fill
-          priority
-          className="object-cover object-center opacity-80"
-          sizes="100vw"
-        />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/70 to-noir/15" />
-      <div className="absolute inset-0 bg-gradient-to-r from-noir/65 via-transparent to-transparent" />
-
-      <div className="container-site relative z-10 pb-24 pt-24 sm:pb-32 sm:pt-48">
-        <div className="max-w-3xl">
-          <div className="flex flex-wrap items-center gap-3 mb-4 sm:mb-6 reveal in-view">
-            <span className="eyebrow !mb-0">Chauffeur privé indépendant</span>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-or/15 border border-or/25 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-or font-medium">
-              <Lightning weight="fill" size={11} />
-              Tesla Model S
-            </span>
-          </div>
-          <h1 className="heading-xl text-creme mb-4 sm:mb-6 reveal in-view" style={{ animationDelay: "80ms" }}>
-            Votre chauffeur privé, <br className="hidden sm:block" />
-            directement avec vous.
-          </h1>
-          <p
-            className="text-creme/75 text-base sm:text-lg max-w-xl mb-6 sm:mb-10 leading-relaxed reveal in-view"
-            style={{ animationDelay: "160ms" }}
-          >
-            Déplacements professionnels, transferts aéroport, trajets privés et mise à
-            disposition — à bord d&apos;une Tesla Model S silencieuse et toujours impeccable.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 reveal in-view" style={{ animationDelay: "240ms" }}>
-            <Link href="/reserver" className="group flex items-center justify-center gap-3 rounded-full bg-or py-3.5 pl-7 pr-2.5 text-sm font-medium tracking-wide text-noir transition-all duration-300 ease-premium hover:-translate-y-0.5 active:scale-[0.98]">
-              Réserver un trajet
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-noir/10 transition-transform duration-300 ease-premium group-hover:translate-x-0.5">
-                <ArrowRight weight="bold" size={15} />
+    <section id="accueil" className="border-b-2 border-divider">
+      <div
+        className="grid"
+        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))" }}
+      >
+        <div className="flex flex-col justify-between gap-12 border-divider px-6 py-16 pb-12 lg:border-r-2">
+          <div>
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <span className="eyebrow !mb-0">Chauffeur privé indépendant</span>
+              <span className="inline-flex items-center gap-1.5 border border-accent px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-accent font-semibold">
+                <Zap size={11} strokeWidth={2} />
+                Tesla Model S
               </span>
+            </div>
+            <h1 className="heading-xl text-ink mb-6">
+              Votre chauffeur privé, <br className="hidden sm:block" />
+              directement avec vous<span className="text-accent">.</span>
+            </h1>
+            <p className="text-ink/70 text-lg max-w-[520px] leading-relaxed">
+              Déplacements professionnels, transferts aéroport, trajets privés et mise à
+              disposition — à bord d&apos;une Tesla Model S silencieuse et toujours impeccable.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link href="/reserver" className="btn-primary btn-lg justify-between">
+              Réserver un trajet
+              <ArrowRight size={18} strokeWidth={2} />
             </Link>
-            <Link href="/devis" className="btn-secondary">
+            <Link href="/devis" className="btn-secondary btn-lg">
               Demander un devis
             </Link>
           </div>
-          <p
-            className="mt-6 sm:mt-8 text-[10px] sm:text-sm uppercase tracking-[0.1em] sm:tracking-[0.2em] text-creme/45 reveal in-view"
-            style={{ animationDelay: "320ms" }}
-          >
-            Réservation directe • Chauffeur professionnel • Service personnalisé • Sans intermédiaire
-          </p>
         </div>
+
+        <div className="relative min-h-[560px]">
+          <Image
+            src="https://images.unsplash.com/photo-1536700503339-1e4b06520771?q=80&w=2400&auto=format&fit=crop"
+            alt="Tesla Model S du chauffeur, à l'arrêt de nuit"
+            fill
+            priority
+            className="object-cover object-center grayscale contrast-[1.08]"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+
+      <div
+        className="grid border-t-2 border-divider"
+        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}
+      >
+        {STRIP.map((item, i) => (
+          <div
+            key={item.index}
+            className={`px-6 py-4 text-[13px] font-semibold text-ink ${
+              i !== STRIP.length - 1 ? "sm:border-r border-divider" : ""
+            }`}
+          >
+            <span className="text-accent">{item.index}</span> {item.label}
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FloppyDisk as Save, Wallet } from "@phosphor-icons/react/dist/ssr";
+import { Save } from "lucide-react";
 import type { PricingRule } from "@/lib/types";
+import { estimatePrice } from "@/lib/pricing";
 
 function RuleForm({ rule }: { rule: PricingRule }) {
   const router = useRouter();
@@ -32,15 +33,39 @@ function RuleForm({ rule }: { rule: PricingRule }) {
     router.refresh();
   }
 
+  // Display-only example, computed from the rule as currently saved in the DB
+  // (not from the live form state) via the existing estimation helper.
+  const exampleLabel = rule.price_per_hour ? "Ex. 3 h" : "Ex. aller-retour";
+  const examplePrice = rule.price_per_hour
+    ? estimatePrice([rule], {
+        serviceType: rule.service_type,
+        tripType: "mise_a_disposition",
+        durationHours: 3,
+        passengers: 2,
+        stopsCount: 0,
+      })
+    : estimatePrice([rule], {
+        serviceType: rule.service_type,
+        tripType: "aller_retour",
+        durationHours: null,
+        passengers: 2,
+        stopsCount: 0,
+      });
+
   return (
-    <div className="card p-6">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-or/15">
-          <Wallet weight="light" size={17} className="text-or" />
+    <div className="px-8 py-5 border-b border-divider">
+      <div className="flex items-start justify-between gap-4 mb-4">
+        <div>
+          <p className="eyebrow mb-1">{rule.service_type}</p>
+          <h3 className="text-lg font-semibold">{rule.label}</h3>
         </div>
-        <h3 className="font-display text-lg">{rule.label}</h3>
+        {examplePrice !== null && (
+          <p className="text-[13px] text-ink/50 shrink-0 whitespace-nowrap">
+            {exampleLabel} : {examplePrice} €
+          </p>
+        )}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-4 mb-4">
         <div>
           <label className="label-field">Prix de base (€)</label>
           <input
@@ -69,17 +94,17 @@ function RuleForm({ rule }: { rule: PricingRule }) {
             onChange={(e) => setPricePerKm(Number(e.target.value))}
           />
         </div>
+        <div className="col-span-2">
+          <label className="label-field">Description</label>
+          <textarea
+            className="input-field min-h-[42px]"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
       </div>
-      <div className="mb-4">
-        <label className="label-field">Description</label>
-        <textarea
-          className="input-field min-h-[70px]"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-      <button onClick={handleSave} disabled={saving} className="btn-dark !py-2.5 text-sm disabled:opacity-60">
-        <Save weight="light" size={15} /> {saving ? "Enregistrement..." : saved ? "Enregistré ✓" : "Enregistrer"}
+      <button onClick={handleSave} disabled={saving} className="btn-secondary text-sm disabled:opacity-60">
+        <Save size={15} strokeWidth={1.75} /> {saving ? "Enregistrement..." : saved ? "Enregistré ✓" : "Enregistrer"}
       </button>
     </div>
   );
@@ -87,7 +112,7 @@ function RuleForm({ rule }: { rule: PricingRule }) {
 
 export default function PricingManager({ rules }: { rules: PricingRule[] }) {
   return (
-    <div className="space-y-6">
+    <div>
       {rules.map((rule) => (
         <RuleForm key={rule.id} rule={rule} />
       ))}

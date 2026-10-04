@@ -1,93 +1,86 @@
 import Image from "next/image";
-import { Airplane as Plane, Briefcase, Car, Clock, Sparkle as Sparkles, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { Plane, Briefcase, Car, Clock, Sparkles } from "lucide-react";
 import { SERVICES } from "@/lib/constants";
 import Reveal from "@/components/Reveal";
 import clsx from "clsx";
 
 const ICONS = { Plane, Briefcase, Car, Clock, Sparkles };
 
-// Asymmetric bento layout instead of a uniform 3-column grid: the two primary
-// services get a wide featured treatment, the rest sit in a tighter row.
-const SPANS = ["lg:col-span-3", "lg:col-span-3", "lg:col-span-2", "lg:col-span-2", "lg:col-span-2"];
-
 export default function Services() {
   return (
-    <section id="services" className="section-padding bg-creme">
+    <section id="services" className="border-b-2 border-divider py-16">
       <div className="container-site">
-        <Reveal className="max-w-xl">
-          <span className="eyebrow">Nos services</span>
-          <h2 className="heading-lg mt-3 mb-4">
-            Un service de chauffeur pensé pour chaque besoin
-          </h2>
-          <p className="text-anthracite/55 mb-16">
-            Que ce soit pour un rendez-vous, un vol, un événement ou une journée entière, votre
-            chauffeur s&apos;adapte à votre emploi du temps.
-          </p>
-        </Reveal>
+        <div
+          className="grid gap-8 mb-12"
+          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))" }}
+        >
+          <Reveal>
+            <span className="eyebrow">01 — Nos services</span>
+            <h2 className="heading-lg mt-3">Un service de chauffeur pensé pour chaque besoin</h2>
+          </Reveal>
+          <Reveal delay={60} className="flex sm:justify-end">
+            <p className="text-left text-[17px] max-w-[460px] text-ink/70 leading-relaxed">
+              Que ce soit pour un rendez-vous, un vol, un événement ou une journée entière, votre
+              chauffeur s&apos;adapte à votre emploi du temps.
+            </p>
+          </Reveal>
+        </div>
 
-        <div className="grid lg:grid-cols-6 gap-5">
+        <div
+          className="grid-gutters"
+          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))" }}
+        >
           {SERVICES.map((service, i) => {
             const Icon = ICONS[service.icon as keyof typeof ICONS];
             const featured = i === 0;
 
             return (
-              <Reveal key={service.key} delay={i * 90} className={SPANS[i]}>
-                <div className={clsx("bezel h-full", featured ? "bg-noir/[0.06]" : "")}>
-                  <div
-                    className={clsx(
-                      "bezel-inner group relative h-full overflow-hidden p-7 transition-transform duration-500 ease-premium hover:-translate-y-1",
-                      featured ? "min-h-[19rem] text-creme" : "min-h-[16rem] bg-white"
-                    )}
-                    style={
-                      !featured
-                        ? { boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.6)" }
-                        : undefined
-                    }
-                  >
-                    {featured && (
-                      <>
-                        <Image
-                          src="https://images.unsplash.com/photo-1536700503339-1e4b06520771?q=80&w=1600&auto=format&fit=crop"
-                          alt="Tesla Model S, le véhicule du chauffeur"
-                          fill
-                          className="object-cover transition-transform duration-[1.2s] ease-premium group-hover:scale-105"
-                          sizes="(max-width: 1024px) 100vw, 60vw"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/75 to-noir/20" />
-                      </>
-                    )}
-
-                    <div className="relative z-10 flex h-full flex-col">
-                      <div
-                        className={clsx(
-                          "mb-6 flex h-12 w-12 items-center justify-center rounded-full",
-                          featured ? "bg-or/20 border border-or/30" : "bg-noir"
-                        )}
-                      >
-                        <Icon weight="light" size={20} className="text-or" />
-                      </div>
-                      <h3 className={clsx("font-display mb-3", featured ? "text-2xl" : "text-xl")}>
+              <Reveal
+                key={service.key}
+                delay={i * 90}
+                className="relative"
+                style={featured ? { gridColumn: "span 2" } : undefined}
+              >
+                {featured ? (
+                  <div className="relative min-h-[320px] h-full overflow-hidden">
+                    <Image
+                      src="https://images.unsplash.com/photo-1536700503339-1e4b06520771?q=80&w=1600&auto=format&fit=crop"
+                      alt="Tesla Model S, le véhicule du chauffeur"
+                      fill
+                      className="object-cover grayscale contrast-[1.08]"
+                      sizes="(max-width: 1024px) 100vw, 60vw"
+                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{ background: "linear-gradient(transparent, rgba(0,0,0,.6))" }}
+                    />
+                    <div className="relative z-10 flex h-full flex-col p-6">
+                      <Icon size={28} strokeWidth={2} className="text-bg mb-6" />
+                      <h3 className="font-display font-extrabold text-[28px] text-bg mt-auto">
                         {service.title}
                       </h3>
-                      <p
-                        className={clsx(
-                          "text-sm leading-relaxed",
-                          featured ? "text-creme/70 max-w-sm" : "text-anthracite/55"
-                        )}
-                      >
+                      <p className="text-sm leading-relaxed text-bg/80 max-w-sm mt-2">
                         {service.description}
                       </p>
-                      <ArrowUpRight
-                        weight="light"
-                        size={16}
-                        className={clsx(
-                          "mt-auto pt-6 opacity-0 -translate-x-1 transition-all duration-300 ease-premium group-hover:opacity-100 group-hover:translate-x-0",
-                          featured ? "text-or" : "text-anthracite/40"
-                        )}
-                      />
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="group flex h-full min-h-[280px] flex-col bg-bg p-6 transition-colors hover:bg-accent-100">
+                    <div className="flex items-start justify-between">
+                      <Icon size={28} strokeWidth={2} className="text-accent" />
+                      <span className="text-[13px] font-semibold text-ink/50">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <h3
+                      className={clsx("font-display font-extrabold text-xl text-ink")}
+                      style={{ marginTop: "auto", paddingTop: "24px" }}
+                    >
+                      {service.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-ink/60 mt-2">{service.description}</p>
+                  </div>
+                )}
               </Reveal>
             );
           })}

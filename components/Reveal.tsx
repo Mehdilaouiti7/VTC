@@ -1,16 +1,18 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode, type CSSProperties } from "react";
 import clsx from "clsx";
 
 export default function Reveal({
   children,
   delay = 0,
   className,
+  style,
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
+  style?: CSSProperties;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -32,7 +34,7 @@ export default function Reveal({
   }, [delay]);
 
   return (
-    <div ref={ref} className={clsx("reveal", className)}>
+    <div ref={ref} className={clsx("reveal", className)} style={style}>
       {children}
     </div>
   );

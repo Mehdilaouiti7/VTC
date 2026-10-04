@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, X, Phone, WhatsappLogo, EnvelopeSimple, UserCircle } from "@phosphor-icons/react/dist/ssr";
+import { Check, X, Phone, MessageCircle, Mail } from "lucide-react";
 import type { QuoteRequest } from "@/lib/types";
 import { SERVICE_LABELS } from "@/lib/types";
 import StatusBadge from "@/components/admin/StatusBadge";
@@ -25,81 +25,77 @@ export default function QuoteCard({ quote }: { quote: QuoteRequest }) {
   const waNumber = quote.phone.replace(/[^\d]/g, "");
 
   return (
-    <div className="card p-6">
-      <div className="flex items-start justify-between gap-4 mb-3">
-        <div className="flex items-start gap-3 min-w-0">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-noir/[0.06]">
-            <UserCircle weight="light" size={19} className="text-anthracite/60" />
-          </div>
-          <div className="min-w-0">
-            <p className="font-medium truncate">
-              {quote.first_name} {quote.last_name}
-            </p>
-            <p className="text-xs text-anthracite/50 truncate">
-              {quote.phone} — {quote.email}
-            </p>
-          </div>
+    <div className="bg-bg px-8 py-6 flex flex-col gap-3.5 min-w-0">
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0">
+          <h3 className="text-xl font-semibold truncate">
+            {quote.first_name} {quote.last_name}
+          </h3>
+          <p className="text-xs text-ink/50 truncate mt-0.5">
+            {quote.phone} — {quote.email}
+          </p>
         </div>
         <StatusBadge status={quote.status} />
       </div>
 
-      <div className="flex gap-2 mb-4">
-        <a
-          href={`tel:${quote.phone.replace(/\s/g, "")}`}
-          className="flex items-center gap-1.5 rounded-full border border-anthracite/10 px-3 py-1.5 text-xs text-anthracite/70 hover:border-or hover:text-or transition-colors"
-        >
-          <Phone weight="light" size={14} /> Appeler
+      <div className="grid grid-cols-2 border-t border-b border-divider divide-x divide-divider">
+        <div className="py-2.5 px-3 min-w-0">
+          <p className="text-[10px] uppercase tracking-wide text-ink/50 mb-0.5">Service</p>
+          <p className="text-sm font-semibold truncate">
+            {quote.service_type ? SERVICE_LABELS[quote.service_type] : "Non précisé"}
+          </p>
+        </div>
+        <div className="py-2.5 px-3 min-w-0">
+          <p className="text-[10px] uppercase tracking-wide text-ink/50 mb-0.5">Date souhaitée</p>
+          <p className="text-sm font-semibold truncate">
+            {quote.preferred_date
+              ? `${new Date(quote.preferred_date + "T00:00:00").toLocaleDateString("fr-FR")}${
+                  quote.preferred_time ? ` à ${quote.preferred_time}` : ""
+                }`
+              : "Non précisée"}
+          </p>
+        </div>
+      </div>
+
+      <p className="text-sm leading-relaxed whitespace-pre-wrap">{quote.request_details}</p>
+
+      <div className="flex gap-2">
+        <a href={`tel:${quote.phone.replace(/\s/g, "")}`} className="btn-secondary text-xs !py-2">
+          <Phone size={14} strokeWidth={1.75} /> Appeler
         </a>
         <a
           href={`https://wa.me/${waNumber}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 rounded-full border border-anthracite/10 px-3 py-1.5 text-xs text-anthracite/70 hover:border-or hover:text-or transition-colors"
+          className="btn-secondary text-xs !py-2"
         >
-          <WhatsappLogo weight="light" size={14} /> WhatsApp
+          <MessageCircle size={14} strokeWidth={1.75} /> WhatsApp
         </a>
-        <a
-          href={`mailto:${quote.email}`}
-          className="flex items-center gap-1.5 rounded-full border border-anthracite/10 px-3 py-1.5 text-xs text-anthracite/70 hover:border-or hover:text-or transition-colors"
-        >
-          <EnvelopeSimple weight="light" size={14} /> Email
+        <a href={`mailto:${quote.email}`} className="btn-secondary text-xs !py-2">
+          <Mail size={14} strokeWidth={1.75} /> Email
         </a>
       </div>
 
-      {quote.service_type && (
-        <p className="text-xs text-anthracite/50 mb-2">Service : {SERVICE_LABELS[quote.service_type]}</p>
-      )}
-      {quote.preferred_date && (
-        <p className="text-xs text-anthracite/50 mb-2">
-          Date souhaitée : {new Date(quote.preferred_date + "T00:00:00").toLocaleDateString("fr-FR")}{" "}
-          {quote.preferred_time}
-        </p>
-      )}
-
-      <p className="text-sm leading-relaxed mb-4 whitespace-pre-wrap">{quote.request_details}</p>
-
-      <p className="text-xs text-anthracite/40 mb-4">
-        Reçue le {new Date(quote.created_at).toLocaleString("fr-FR")}
-      </p>
-
       {quote.status === "pending" && (
-        <div className="flex gap-2">
+        <div className="grid grid-cols-[1fr_auto] gap-2">
           <button
             disabled={saving}
             onClick={() => updateStatus("confirmed")}
-            className="btn-primary !py-2 !px-4 text-xs disabled:opacity-40"
+            className="btn-primary text-xs !py-2.5 !justify-between disabled:opacity-40"
           >
-            <Check weight="light" size={14} /> Traité / Devis envoyé
+            Traité / Devis envoyé <Check size={14} strokeWidth={1.75} />
           </button>
           <button
             disabled={saving}
             onClick={() => updateStatus("refused")}
-            className="btn-secondary !text-anthracite !border-anthracite/20 !py-2 !px-4 text-xs disabled:opacity-40"
+            className="btn-secondary text-xs !py-2.5 disabled:opacity-40"
           >
-            <X weight="light" size={14} /> Refuser
+            <X size={14} strokeWidth={1.75} /> Refuser
           </button>
         </div>
       )}
+
+      <p className="text-[11px] text-ink/40">Reçue le {new Date(quote.created_at).toLocaleString("fr-FR")}</p>
     </div>
   );
 }

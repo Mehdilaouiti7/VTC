@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { CaretLeft as ChevronLeft, CaretRight as ChevronRight } from "@phosphor-icons/react/dist/ssr";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import clsx from "clsx";
 
 const WEEKDAYS = ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"];
@@ -55,34 +55,34 @@ export default function BookingsCalendar({ bookingDates }: { bookingDates: strin
   }
 
   return (
-    <div className="card p-5">
+    <div>
       <div className="flex items-center justify-between mb-4">
         <button
           onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1))}
-          className="p-1.5 rounded hover:bg-anthracite/5"
+          className="btn-icon btn-secondary"
           aria-label="Mois précédent"
         >
-          <ChevronLeft weight="light" size={18} />
+          <ChevronLeft size={18} strokeWidth={1.75} />
         </button>
-        <p className="font-display text-sm">
+        <p className="font-display font-extrabold text-base">
           {MONTHS[cursor.getMonth()]} {cursor.getFullYear()}
         </p>
         <button
           onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1))}
-          className="p-1.5 rounded hover:bg-anthracite/5"
+          className="btn-icon btn-secondary"
           aria-label="Mois suivant"
         >
-          <ChevronRight weight="light" size={18} />
+          <ChevronRight size={18} strokeWidth={1.75} />
         </button>
       </div>
 
-      <div className="grid grid-cols-7 gap-1 text-center text-[10px] uppercase text-anthracite/40 mb-1">
+      <div className="grid grid-cols-7 gap-[2px] text-center text-[10px] font-semibold uppercase text-ink/50 pb-2 border-b-2 border-divider">
         {WEEKDAYS.map((w) => (
           <div key={w}>{w}</div>
         ))}
       </div>
 
-      <div className="grid grid-cols-7 gap-1">
+      <div className="grid grid-cols-7 gap-[2px] mt-[2px]">
         {days.map((day, i) => {
           if (!day) return <div key={i} />;
           const dateStr = toDateStr(day);
@@ -95,17 +95,17 @@ export default function BookingsCalendar({ bookingDates }: { bookingDates: strin
               key={dateStr}
               onClick={() => selectDate(dateStr)}
               className={clsx(
-                "relative aspect-square rounded-md text-xs flex items-center justify-center transition-colors",
-                isSelected ? "bg-or text-noir font-medium" : "hover:bg-anthracite/5",
-                isToday && !isSelected && "border border-or/50"
+                "relative aspect-square border border-divider text-[13px] font-semibold flex items-start justify-start p-1 transition-colors",
+                isSelected ? "bg-accent text-bg" : "hover:bg-accent-100",
+                isToday && !isSelected && "border-accent"
               )}
             >
               {day.getDate()}
               {count > 0 && (
                 <span
                   className={clsx(
-                    "absolute bottom-1 h-1 w-1 rounded-full",
-                    isSelected ? "bg-noir" : "bg-or"
+                    "absolute bottom-1 left-1 h-[6px] w-[6px]",
+                    isSelected ? "bg-bg" : "bg-accent"
                   )}
                 />
               )}
@@ -115,10 +115,7 @@ export default function BookingsCalendar({ bookingDates }: { bookingDates: strin
       </div>
 
       {selectedDate && (
-        <button
-          onClick={() => selectDate(selectedDate)}
-          className="mt-4 text-xs text-anthracite/50 hover:text-anthracite underline"
-        >
+        <button onClick={() => selectDate(selectedDate)} className="btn-ghost mt-4 !px-0 text-xs">
           Effacer le filtre de date
         </button>
       )}
