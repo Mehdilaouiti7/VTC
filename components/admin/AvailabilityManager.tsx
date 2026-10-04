@@ -12,6 +12,47 @@ function todayStr() {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
+const HOURS = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, "0"));
+const MINUTES = ["00", "15", "30", "45"];
+
+// Native <input type="time"> renders wildly differently across mobile browsers
+// (confirmed overflowing on iOS Safari, un-reproducible from this environment's
+// Chromium-only toolchain). Two plain <select> elements with a hard-coded pixel
+// width render identically everywhere — no more guessing.
+function TimeSelect({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const [h, m] = value.split(":");
+  return (
+    <div className="flex items-center gap-2">
+      <Clock weight="light" size={16} className="text-or shrink-0" />
+      <select
+        className="input-field !w-[72px] !px-2 text-center"
+        style={{ width: 72 }}
+        value={h}
+        onChange={(e) => onChange(`${e.target.value}:${m}`)}
+      >
+        {HOURS.map((hh) => (
+          <option key={hh} value={hh}>
+            {hh}
+          </option>
+        ))}
+      </select>
+      <span className="text-anthracite/40">:</span>
+      <select
+        className="input-field !w-[72px] !px-2 text-center"
+        style={{ width: 72 }}
+        value={m}
+        onChange={(e) => onChange(`${h}:${e.target.value}`)}
+      >
+        {MINUTES.map((mm) => (
+          <option key={mm} value={mm}>
+            {mm}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
 export default function AvailabilityManager({ blockedSlots }: { blockedSlots: BlockedSlot[] }) {
   const router = useRouter();
   const [startDate, setStartDate] = useState("");
@@ -76,16 +117,7 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
               blockedSlots={blockedSlots}
               minDate={todayStr()}
             />
-            <div className="relative">
-              <Clock weight="light" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
-              <input
-                required
-                type="time"
-                className="input-field pl-10"
-                value={startTime}
-                onChange={(e) => setStartTime(e.target.value)}
-              />
-            </div>
+            <TimeSelect value={startTime} onChange={setStartTime} />
           </div>
           <div className="space-y-2">
             <label className="label-field !mb-0">Jusqu&apos;au</label>
@@ -95,16 +127,7 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
               blockedSlots={blockedSlots}
               minDate={startDate || todayStr()}
             />
-            <div className="relative">
-              <Clock weight="light" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
-              <input
-                required
-                type="time"
-                className="input-field pl-10"
-                value={endTime}
-                onChange={(e) => setEndTime(e.target.value)}
-              />
-            </div>
+            <TimeSelect value={endTime} onChange={setEndTime} />
           </div>
           <div>
             <label className="label-field">Motif (optionnel)</label>
