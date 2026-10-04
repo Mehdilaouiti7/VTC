@@ -2,8 +2,15 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Trash as Trash2, Plus, Calendar, Clock, CalendarX, NotePencil } from "@phosphor-icons/react/dist/ssr";
+import { Trash as Trash2, Plus, Clock, CalendarX, NotePencil, Calendar } from "@phosphor-icons/react/dist/ssr";
 import type { BlockedSlot } from "@/lib/types";
+import AvailabilityCalendar from "@/components/booking/AvailabilityCalendar";
+
+function todayStr() {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
 
 export default function AvailabilityManager({ blockedSlots }: { blockedSlots: BlockedSlot[] }) {
   const router = useRouter();
@@ -60,16 +67,15 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
         <form onSubmit={handleAdd} className="space-y-4">
           <div className="space-y-2">
             <label className="label-field !mb-0">Indisponible du</label>
-            <div className="relative">
-              <Calendar weight="light" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
-              <input
-                required
-                type="date"
-                className="input-field pl-10"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-              />
-            </div>
+            <AvailabilityCalendar
+              selectedDate={startDate}
+              onSelect={(d) => {
+                setStartDate(d);
+                if (endDate && endDate < d) setEndDate(d);
+              }}
+              blockedSlots={blockedSlots}
+              minDate={todayStr()}
+            />
             <div className="relative">
               <Clock weight="light" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
               <input
@@ -83,16 +89,12 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
           </div>
           <div className="space-y-2">
             <label className="label-field !mb-0">Jusqu&apos;au</label>
-            <div className="relative">
-              <Calendar weight="light" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
-              <input
-                required
-                type="date"
-                className="input-field pl-10"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-              />
-            </div>
+            <AvailabilityCalendar
+              selectedDate={endDate}
+              onSelect={(d) => setEndDate(d)}
+              blockedSlots={blockedSlots}
+              minDate={startDate || todayStr()}
+            />
             <div className="relative">
               <Clock weight="light" size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-or pointer-events-none" />
               <input
