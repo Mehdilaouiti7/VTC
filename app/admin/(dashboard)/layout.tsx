@@ -36,7 +36,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <span className="font-display text-lg">{SITE_NAME}</span>
           <SignOutButton />
         </header>
-        <div className="lg:hidden overflow-x-auto bg-noir/95 border-b border-white/10 px-3 py-2">
+        <div className="lg:hidden bg-noir/95 border-b border-white/10 px-2 py-2">
           <AdminNav horizontal />
         </div>
         <main className="p-5 sm:p-8 lg:p-10">{children}</main>
