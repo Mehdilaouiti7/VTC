@@ -7,8 +7,10 @@ import type { BlockedSlot } from "@/lib/types";
 
 export default function AvailabilityManager({ blockedSlots }: { blockedSlots: BlockedSlot[] }) {
   const router = useRouter();
-  const [startAt, setStartAt] = useState("");
-  const [endAt, setEndAt] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [startTime, setStartTime] = useState("00:00");
+  const [endDate, setEndDate] = useState("");
+  const [endTime, setEndTime] = useState("23:59");
   const [reason, setReason] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,8 +24,8 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        start_at: new Date(startAt).toISOString(),
-        end_at: new Date(endAt).toISOString(),
+        start_at: new Date(`${startDate}T${startTime || "00:00"}`).toISOString(),
+        end_at: new Date(`${endDate}T${endTime || "23:59"}`).toISOString(),
         reason: reason || null,
       }),
     });
@@ -33,8 +35,10 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
       setError("Impossible d'ajouter ce créneau. Vérifiez les dates.");
       return;
     }
-    setStartAt("");
-    setEndAt("");
+    setStartDate("");
+    setStartTime("00:00");
+    setEndDate("");
+    setEndTime("23:59");
     setReason("");
     router.refresh();
   }
@@ -49,24 +53,38 @@ export default function AvailabilityManager({ blockedSlots }: { blockedSlots: Bl
       <div className="card p-6 sm:p-8 min-w-0">
         <h2 className="font-display text-xl mb-6">Bloquer un créneau</h2>
         <form onSubmit={handleAdd} className="space-y-4">
-          <div>
-            <label className="label-field">Indisponible du</label>
+          <div className="space-y-2">
+            <label className="label-field !mb-0">Indisponible du</label>
             <input
               required
-              type="datetime-local"
+              type="date"
               className="input-field"
-              value={startAt}
-              onChange={(e) => setStartAt(e.target.value)}
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+            <input
+              required
+              type="time"
+              className="input-field"
+              value={startTime}
+              onChange={(e) => setStartTime(e.target.value)}
             />
           </div>
-          <div>
-            <label className="label-field">Jusqu&apos;au</label>
+          <div className="space-y-2">
+            <label className="label-field !mb-0">Jusqu&apos;au</label>
             <input
               required
-              type="datetime-local"
+              type="date"
               className="input-field"
-              value={endAt}
-              onChange={(e) => setEndAt(e.target.value)}
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+            <input
+              required
+              type="time"
+              className="input-field"
+              value={endTime}
+              onChange={(e) => setEndTime(e.target.value)}
             />
           </div>
           <div>
